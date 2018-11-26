@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Created by 张洲徽 on 2018/10/23.
+ * 搭建环境测试用
  */
 public class Cost implements Serializable {
     private static final long serialVersionUID = 1L;

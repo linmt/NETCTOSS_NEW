@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Created by 热带雨林 on 2018/10/30.
+ * 搭建环境测试用
  */
 //这个案例中用不到
 public class CostSimple implements Serializable{

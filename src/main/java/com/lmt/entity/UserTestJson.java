@@ -3,16 +3,16 @@ package com.lmt.entity;
 import java.io.Serializable;
 
 /**
- * Created by 张洲徽 on 2018/11/23.
+ * 用注解向浏览器返回json案例，文件2
  */
-public class User implements Serializable{
+public class UserTestJson implements Serializable{
     private int id;
     private String name;
     private int age;
 
-    public User() {
+    public UserTestJson() {
     }
-    public User(int id, String name, int age) {
+    public UserTestJson(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;

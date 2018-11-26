@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- 搭建环境测试用 -->
+
 <!-- namespqce要和CostMapper路径一致 -->
 <mapper namespace="com.lmt.dao.CostDao">
     <insert id="save" parameterType="com.lmt.entity.Cost">
