@@ -1,0 +1,8 @@
+181125
+测试向浏览器输出json
+JsonController、UserTestJson
+
+181127
+创建实体类，测试连接数据库
+User、UserDao、TestUserDao、UserMapper.xml
+

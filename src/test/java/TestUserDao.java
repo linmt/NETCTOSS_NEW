@@ -13,7 +13,7 @@ public class TestUserDao extends BaseJunit4Test {
     @org.junit.Test  //标明是测试方法
     //@Ignore  //表示该方法被忽略
     public void find( ) {
-        User user=userdao.findByName("");
+        User user=userdao.findByName("zhouj");
         System.out.println(user);
     }
 }
