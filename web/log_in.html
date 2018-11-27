@@ -1,117 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" href="styles/login.css"/>
-<script type="text/javascript" 
-	src="scripts/jquery.min.js">
-</script>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="styles/login.css"/>
+	<script type="text/javascript" src="scripts/jquery.min.js"/>
+	<script type="text/javascript">
+		$(function(){
+		    $("#login").onclick(function () {
+				alert("æµ‹è¯•æ˜¯å¦èƒ½è°ƒç”¨æ­¤å‡½æ•°");
+            });
+		});
+	</script>
 </head>
-	<body>
-		<div class="global">
-			<div class="log log_in" tabindex='-1' id='dl'>
-				<dl>
-					<dt>
-						<div class='header'>
-							<h3>µÇ&nbsp;Â¼</h3>
-						</div>
-					</dt>
-					<dt></dt>
-					<dt>
-						<div class='letter'>
-							ÓÃ»§Ãû:&nbsp;<input type="text" name="" id="count" tabindex='1'/>
-							<span id="count_span"></span>
-						</div>
-					</dt>
-					<dt>
-						<div class='letter'>
-							ÃÜ&nbsp;&nbsp;&nbsp;Âë:&nbsp;<input type="password" name="" id="password" tabindex='2'/>
-							<span id="password_span"></span>
-						</div>
-					</dt>
-					<dt>
-						<div>
-							<input type="button" name="" id="login" value='&nbspµÇ&nbspÂ¼&nbsp' tabindex='3'/>
-							<input type="button" name="" id="sig_in" value='&nbsp×¢&nbsp²á&nbsp' tabindex='4'/>
-						</div>
-					</dt>
-				</dl>
+<body>
+<div class="global">
+	<div class="log log_in" tabindex='-1' id='dl'>
+		<dl>
+			<dt>
+				<div class='header'>
+					<h3>ç™»&nbsp;å½•</h3>
+				</div>
+			</dt>
+			<dt></dt>
+			<dt>
+				<div class='letter'>
+					ç”¨æˆ·å:&nbsp;<input type="text" name="" id="count" tabindex='1'/>
+					<span id="count_span"></span>
+				</div>
+			</dt>
+			<dt>
+				<div class='letter'>
+					å¯†&nbsp;&nbsp;&nbsp;ç :&nbsp;<input type="password" name="" id="password" tabindex='2'/>
+					<span id="password_span"></span>
+				</div>
+			</dt>
+			<dt>
+			<div>
+				<input type="button" name="" id="login" value='&nbspç™»&nbspå½•&nbsp' tabindex='3'/>
+				<input type="button" name="" id="sig_in" value='&nbspæ³¨&nbspå†Œ&nbsp' tabindex='4'/>
 			</div>
-			<div class="sig sig_out" tabindex='-1' id='zc' style='visibility:hidden;'>
-				<dl>
-					<dt>
-						<div class='header'>
-							<h3>×¢&nbsp;²á</h3>
-						</div>
-					</dt>
-					<dt></dt>
-					<dt>
-						<div class='letter'>
-							ÓÃ»§Ãû:&nbsp;<input type="text" name="" id="regist_username" tabindex='5'/>
-							<div class='warning' id='warning_1'><span>¸ÃÓÃ»§Ãû²»¿ÉÓÃ</span></div>
-						</div>
-					</dt>
-					<dt>
-						<div class='letter'>
-							êÇ&nbsp;&nbsp;&nbsp;³Æ:&nbsp;<input type="text" name="" id="nickname" tabindex='6'/>
-							<div class="warning" id="warning_4"><span></span></div>
-						</div>
-					</dt>
-					<dt>
-						<div class='letter'>
-							ÃÜ&nbsp;&nbsp;&nbsp;Âë:&nbsp;<input type="password" name="" id="regist_password" tabindex='7'/>
-							<div class='warning' id='warning_2'><span>ÃÜÂë³¤¶È¹ı¶Ì</span></div>
-						</div>
-					</dt>
-					<dt>
-						<div class='password'>
-							&nbsp;&nbsp;&nbsp;È·ÈÏÃÜÂë:&nbsp;<input type="password" name="" id="final_password" tabindex='8'/>
-							<div class='warning' id='warning_3'><span>ÃÜÂëÊäÈë²»Ò»ÖÂ</span></div>
-						</div>
-					</dt>
-					<dt>
-						<div>
-							<input type="button" name="" id="regist_button" value='&nbsp×¢&nbsp²á&nbsp' tabindex='9'/>
-							<input type="button" name="" id="back" value='&nbsp·µ&nbsp»Ø&nbsp' tabindex='10'/>
-							<script type="text/javascript">
-							function get(e){
-								return document.getElementById(e);
-							}
-							get('sig_in').onclick=function(){
-								get('dl').className='log log_out';
-								get('zc').className='sig sig_in';
-							}
-							get('back').onclick=function(){
-								get('zc').className='sig sig_out';
-								get('dl').className='log log_in';
-							}
-							window.onload=function(){
-								var t =setTimeout("get('zc').style.visibility='visible'",800);
-								get('final_password').onblur=function(){
-									var npassword=get('regist_password').value;
-									var fpassword=get('final_password').value;
-									if(npassword!=fpassword){
-										get('warning_3').style.display='block';
-									}
-								}
-								get('regist_password').onblur=function(){
-									var npassword=get('regist_password').value.length;
-									if(npassword<6&&npassword>0){
-										get('warning_2').style.display='block';
-									}
-								}
-								get('regist_password').onfocus=function(){
-									get('warning_2').style.display='none';
-								}
-								get('final_password').onfocus=function(){
-									get('warning_3').style.display='none';
+			</dt>
+		</dl>
+	</div>
+	<div class="sig sig_out" tabindex='-1' id='zc' style='visibility:hidden;'>
+		<dl>
+			<dt>
+				<div class='header'>
+					<h3>æ³¨&nbsp;å†Œ</h3>
+				</div>
+			</dt>
+			<dt></dt>
+			<dt>
+				<div class='letter'>
+					ç”¨æˆ·å:&nbsp;<input type="text" name="" id="regist_username" tabindex='5'/>
+					<div class='warning' id='warning_1'><span>è¯¥ç”¨æˆ·åä¸å¯ç”¨</span></div>
+				</div>
+			</dt>
+			<dt>
+				<div class='letter'>
+					æ˜µ&nbsp;&nbsp;&nbsp;ç§°:&nbsp;<input type="text" name="" id="nickname" tabindex='6'/>
+					<div class="warning" id="warning_4"><span></span></div>
+				</div>
+			</dt>
+			<dt>
+				<div class='letter'>
+					å¯†&nbsp;&nbsp;&nbsp;ç :&nbsp;<input type="password" name="" id="regist_password" tabindex='7'/>
+					<div class='warning' id='warning_2'><span>å¯†ç é•¿åº¦è¿‡çŸ­</span></div>
+				</div>
+			</dt>
+			<dt>
+				<div class='password'>
+					&nbsp;&nbsp;&nbsp;ç¡®è®¤å¯†ç :&nbsp;<input type="password" name="" id="final_password" tabindex='8'/>
+					<div class='warning' id='warning_3'><span>å¯†ç è¾“å…¥ä¸ä¸€è‡´</span></div>
+				</div>
+			</dt>
+			<dt>
+				<div>
+					<input type="button" name="" id="regist_button" value='&nbspæ³¨&nbspå†Œ&nbsp' tabindex='9'/>
+					<input type="button" name="" id="back" value='&nbspè¿”&nbspå›&nbsp' tabindex='10'/>
+					<script type="text/javascript">
+						function get(e){
+							return document.getElementById(e);
+						}
+						get('sig_in').onclick=function(){
+							get('dl').className='log log_out';
+							get('zc').className='sig sig_in';
+						}
+						get('back').onclick=function(){
+							get('zc').className='sig sig_out';
+							get('dl').className='log log_in';
+						}
+						window.onload=function(){
+							var t =setTimeout("get('zc').style.visibility='visible'",800);
+							get('final_password').onblur=function(){
+								var npassword=get('regist_password').value;
+								var fpassword=get('final_password').value;
+								if(npassword!=fpassword){
+									get('warning_3').style.display='block';
 								}
 							}
-							</script>
-						</div>
-					</dt>
-				</dl>
-			</div>
-		</div>
-	</body>
+							get('regist_password').onblur=function(){
+								var npassword=get('regist_password').value.length;
+								if(npassword<6&&npassword>0){
+									get('warning_2').style.display='block';
+								}
+							}
+							get('regist_password').onfocus=function(){
+								get('warning_2').style.display='none';
+							}
+							get('final_password').onfocus=function(){
+								get('warning_3').style.display='none';
+							}
+						}
+					</script>
+				</div>
+			</dt>
+		</dl>
+	</div>
+</div>
+</body>
 </html>
