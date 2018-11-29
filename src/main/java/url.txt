@@ -1,0 +1,13 @@
+http://localhost:8080/spring_project3/tologin.form
+
+http://localhost:8080/springmvc-json/toage.form
+
+http://localhost:8080/springmvc-json/cost/list3.form
+
+http://localhost:8080/springmvc-json/json1.form
+
+http://localhost:8080/cost/list3.form
+
+http://localhost:8080/json1.form
+
+http://localhost:8080/user/login.form?name=cat&password=123

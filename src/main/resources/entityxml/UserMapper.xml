@@ -11,13 +11,13 @@
             cn_user_name,
             cn_user_password,
             cn_user_token,
-            cn_user_nick
+            cn_user_desc
         )values(
             #{cn_user_id},
             #{cn_user_name},
             #{cn_user_password},
             #{cn_user_token},
-            #{cn_user_nick}
+            #{cn_user_desc}
         )
     </insert>
 </mapper>

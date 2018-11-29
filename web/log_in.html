@@ -3,11 +3,45 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="styles/login.css"/>
-	<script type="text/javascript" src="scripts/jquery.min.js"/>
+	<!--不可以这么写<script type="text/javascript" src="scripts/jquery.min.js"/>-->
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-		    $("#login").onclick(function () {
-				alert("测试是否能调用此函数");
+		    $("#login").click(function () {
+				//alert("测试是否能调用此函数");
+				//获取参数
+				var name=$("#count").val().trim();
+				var password=$("#password").val().trim();
+				var ok=true;
+				if(name=""){
+                    $("#count_span").html("用户名不能为空");
+                    ok=false;
+				}
+                if(password=""){
+                    $("#password_span").html("密码不能为空");
+                    ok=false;
+                }
+                //发送请求
+				if(ok){
+                    $.ajax({
+                        url:'/user/login.form',
+						type:'post',
+						data:{'name':name,'password':password},
+                        dataType:'json',
+                        success:function(data){
+                            $('#tb1').empty();
+                            for(i = 0;i < data.length;i ++){
+                                var s = data[i];
+                                $('#tb1').append('<tr><td>' + s.code+ '</td><td>' + s.name
+                                    + '</td><td>' + s.price + '</td></tr>');
+                            }
+                        },
+                        error:function(){
+                            alert("登录失败");
+                        }
+                    });
+				}
+
             });
 		});
 	</script>

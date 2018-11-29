@@ -30,6 +30,7 @@ INSERT INTO cn_user VALUES ('6f339f0a-2068-4db1-8fef-8e68f444c72c', 'saipi', '42
 INSERT INTO cn_user VALUES ('974375a8-8557-4308-bd36-9455c7863239', 'zhoujia1231', '6a204bd89f3c8348afd5c77c717a097a', null, null);
 INSERT INTO cn_user VALUES ('bf9d2885-f34e-4c78-9ae5-2723f62aa2b5', 'saipi', '4297f44b13955235245b2497399d7a93', null, null);
 INSERT INTO cn_user VALUES ('ea09d9b1-ede7-4bd8-b43d-a546680df00b', 'yht', '96e79218965eb72c92a549dd5a330112', null, null);
+insert into cn_user values ('1','cat','123',null,null);
 commit;
 
 -- ----------------------------

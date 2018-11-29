@@ -6,3 +6,8 @@ JsonController、UserTestJson
 创建实体类，测试连接数据库
 User、UserDao、TestUserDao、UserMapper.xml
 
+181129
+登录功能
+之前创建了：User、UserDao、UserMapper、TestUserDao
+log_in.html、NoteResult<T>、UserService、UserServiceImpl、TestUserService
+
