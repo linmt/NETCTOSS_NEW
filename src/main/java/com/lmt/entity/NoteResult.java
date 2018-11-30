@@ -1,4 +1,4 @@
-package com.lmt.util;
+package com.lmt.entity;
 
 import java.io.Serializable;
 

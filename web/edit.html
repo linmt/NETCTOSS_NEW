@@ -1,391 +1,392 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>ÎÒµÄ±Ê¼Ç</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="x-pjax-version" content="v173">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/favico-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/favico-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/favico-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="ico/favico-57-precomposed.png">
-        <link rel="shortcut icon" href="ico/favico.png">
-        <link rel="shortcut icon" href="ico/favico.ico">
-        <link rel="stylesheet" href="styles/icon.css"/>
-        <link rel="stylesheet" href="styles/main.css"/>
-		<!-- Google-Code´úÂë¸ßÁÁCSS -->
-        <link rel="stylesheet" href="styles/prettify.css"/>
-		<!-- Ueditor±à¼­Æ÷CSS -->
-		<link href="styles/umeditor.min.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" 
-	src="scripts/jquery.min.js">
-</script>
-<script type="text/javascript" 
-	src="scripts/cookie_util.js">
-</script>
-<script type="text/javascript"
-	src="scripts/base.js">
-</script>
-<script type="text/javascript"
-	src="scripts/notebook.js">
-</script>
-<script type="text/javascript"
-	src="scripts/note.js">
-</script>
-<script type="text/javascript"
-	src="scripts/alert.js">
-</script>
-<script type="text/javascript"
-	src="scripts/recycle.js">
-</script>
-<script type="text/javascript">
-//´ÓCookie»ñÈ¡ÓÃ»§ID
-var userId = getCookie("userId");
-var um; 
-if(userId==null){//Î´µÇÂ¼ÓÃ»§
-	window.location.href="log_in.html";
-}else{
-	//ÆäËû²Ù×÷
-	$(function(){
-		//ÊµÀı»¯Ueditor±à¼­Æ÷
-		um = UM.getEditor('myEditor'); 
-		//·¢ËÍajaxÇëÇó¼ÓÔØ±Ê¼Ç±¾ÁĞ±í
-		loadUserBooks();
-		//µã»÷±Ê¼Ç±¾¼ÓÔØ±Ê¼ÇÁĞ±í(¶¯Ì¬°ó¶¨µ¥»÷ÊÂ¼ş)
-		$("#book_list").on("click","li",loadBookNotes);
-		//µã»÷±Ê¼Ç¼ÓÔØ±Ê¼ÇĞÅÏ¢
-		$("#note_list").on("click","li",loadNoteDetail);
-		//µ¯³ö"Ìí¼Ó±Ê¼Ç±¾"¶Ô»°¿ò
-		$("#add_notebook").click(showAddBookWindow);
-		//¹Ø±Õ¶Ô»°¿ò
-		$("#can").on("click",".cancle,.close",closeWindow);
-		//È·ÈÏ´´½¨±Ê¼Ç±¾
-		$("#can").on("click","#sure_addbook",sureAddBook);
-		//µ¯³ö"Ìí¼Ó±Ê¼Ç"¶Ô»°¿ò
-		$("#add_note").click(showAddNoteWindow);
-		//È·ÈÏ´´½¨±Ê¼Ç
-		$("#can").on("click","#sure_addnote",sureAddNote);
-		//±£´æ±Ê¼Ç
-		$("#save_note").click(sureUpdateNote);
-		//ÏÔÊ¾±Ê¼Ç²Ëµ¥
-		showNoteMenu();
-		//µ¯³ö·ÅÈë»ØÊÕÕ¾¶Ô»°¿ò
-		$("#note_list").on("click",".btn_delete",showRecycleNoteWindow);
-		//È·ÈÏ·ÅÈë»ØÊÕÕ¾²Ù×÷
-		$("#can").on("click","#sure_recyclenote",sureRecycleNote);
-		//·ÖÏí±Ê¼Ç
-		$("#note_list").on("click",".btn_share",sureShareNote);
-		//ËÑË÷·ÖÏí±Ê¼Ç
-		$("#search_note").keydown(sureSearchShare);
-		//ËÑË÷³öÀ´µÄ·ÖÏí±Ê¼ÇÔ¤ÀÀ
-		$("#search_list").on("click","li",viewShareNote);
-		//µ¯³ö×ªÒÆ±Ê¼Ç¶Ô»°¿ò
-		$("#note_list").on("click",".btn_move",showMoveNoteWindow);
-		//È·¶¨×ªÒÆ±Ê¼Ç²Ù×÷
-		$("#can").on("click","#sure_movenote",function(){
-			//»ñÈ¡ÇëÇó²ÎÊı
-			var $noteLi = 
-				$("#note_list a.checked").parent();
-			var noteId = $noteLi.data("noteId");
-			var bookId = $("#moveSelect").val();
-			//TODO ¼ì²éÊÇ·ñÑ¡Ôñ±Ê¼Ç±¾
-			//TODO ¼ì²éÊÇ·ñºÍÔ­±Ê¼Ç±¾Ò»Ñù
-			//·¢ËÍAjaxÇëÇó
-			$.ajax({
-				url:base_url+"/note/move.do",
-				type:"post",
-				data:{"noteId":noteId,"bookId":bookId},
-				dataType:"json",
-				success:function(result){
-					if(result.status==0){
-						closeWindow();//¹Ø±Õ¶Ô»°¿ò
-						$noteLi.remove();//ÒÆ³ı±Ê¼Ç
-						alert(result.msg);//ÌáÊ¾³É¹¦
-					}
-				},
-				error:function(){
-					alert("×ªÒÆ±Ê¼ÇÊ§°Ü");
-				}
-			});
-		});
-	});
-}
-</script>
-    </head>
-    <body class="animated fadeIn">
-        <header class="header">
-            <div class="header-brand">
-                <a data-pjax=".content-body" href="edit.html">
-                    <img class="brand-logo" src="images/dummy/8986f28e.stilearn-logo.png" alt="Stilearn Admin Sample Logo">
-                </a>
-            </div>
-            <div class="header-profile">
-                <div class="profile-nav">
-                    <span class="profile-username"></span>
-                    <a  class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="fa fa-angle-down"></span>
-                    </a>
-                    <ul class="dropdown-menu animated flipInX pull-right" role="menu">
-                        <li><a href="Change_password.html"><i class="fa fa-user"></i> ĞŞ¸ÄÃÜÂë</a></li>
-                        <li class="divider"></li>
-                        <li><a id="logout" href="#" ><i class="fa fa-sign-out"></i> ÍË³öµÇÂ¼</a></li>
-                    </ul>
-                </div>
-            </div>
-            <form class="form-inline" onsubmit="return false;">
-                <button type="button" class="btn btn-default btn-expand-search"><i class="fa fa-search"></i></button>
-                <div class="toggle-search">
-                    <input type="text" class="form-control" placeholder="ËÑË÷±Ê¼Ç" id='search_note'>
-                    <button type="button" class="btn btn-default btn-collapse-search"><i class="fa fa-times"></i></button>
-                </div>
-            </form>
-            <ul class="hidden-xs header-menu pull-right">
-                <li>
-                    <a href="activity.html" target='_blank' title="±Ê¼Ç»î¶¯">»î¶¯</a>
-                </li>
-            </ul>
-        </header>
-		<div class="row" style='padding:0;' id='center'>
-			<!-- alert_background-->
-			<div class="opacity_bg" style='display:none'></div>
-			<!-- alert_notebook -->
-			<div id="can"></div>
-			<div class="col-xs-2" style='padding:0;' id='pc_part_1'>
-				<!-- side-right -->
-				<div class="pc_top_first">
-					<h3>È«²¿±Ê¼Ç±¾</h3>
-					<button type="button" class="btn btn-default btn-xs btn_plus" id='add_notebook'><i class="fa fa-plus"></i></button>
-				</div>
-				<aside class="side-right" id='first_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body">
-								<ul id="book_list" class="contacts-list">
-									<!-- ¶¯Ì¬Éú³É±Ê¼Ç±¾liÁĞ±í -->
-								</ul>
-							</div>
-						</div>
-					</div>
-				</aside>
-				<div class="row clear_margin">
-					<div class="col-xs-4 click" id='rollback_button' title='»ØÊÕÕ¾'><i class='fa fa-trash-o' style='font-size:20px;line-height:31px;'></i></div>
-					<div class="col-xs-4 click" id='like_button' title='ÊÕ²Ø±Ê¼Ç±¾'><i class='fa fa-star' style='font-size:20px;line-height:31px;'></i></div>
-					<div class="col-xs-4 click" id='action_button' title='²Î¼Ó»î¶¯±Ê¼Ç'><i class='fa fa-users' style='font-size:20px;line-height:30px;'></i></div>
-				</div>
-			</div>
-			<!-- È«²¿±Ê¼Ç±¾ -->
-			<!-- È«²¿±Ê¼Ç -->
-			<div class="col-xs-3" style='padding:0;' id='pc_part_2'>
-				<div class="pc_top_second" id='notebookId'>
-					<h3>È«²¿±Ê¼Ç</h3>
-					<button type="button" class="btn btn-default btn-xs btn_plus" id='add_note'><i class="fa fa-plus"></i></button>
-				</div>
-				<aside class="side-right" id='second_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body">
-								<ul id="note_list" class="contacts-list">
-									<!-- ¶¯Ì¬¼ÓÔØ±Ê¼ÇÁĞ±íli -->
-								</ul>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</div>
-			<!-- È«²¿±Ê¼Ç -->
-			<!-- »ØÊÕÕ¾±Ê¼Ç -->
-			<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_4'>
-				<div class="pc_top_second">
-					<h3>»ØÊÕÕ¾±Ê¼Ç</h3>
-				</div>
-				<aside class="side-right" id='four_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body">
-								<ul class="contacts-list">
-									<li class="disable"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> Ğé¼Ù»ØÊÕÕ¾±Ê¼Ç<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button><button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay"><i class="fa fa-reply"></i></button></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</div>
-			<!-- »ØÊÕÕ¾±Ê¼Ç -->
-			<!-- ËÑË÷±Ê¼ÇÁĞ±í -->
-			<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_6'>
-				<div class="pc_top_second">
-					<h3>ËÑË÷½á¹û</h3>
-				</div>
-				<aside class="side-right" id='sixth_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body">
-								<ul id="search_list" class="contacts-list">
-								</ul>
-							</div>
-						</div>
-						<div id='more_note'>¸ü¶à...</div>
-					</div>
-				</aside>
-			</div>
-			<!-- ËÑË÷±Ê¼ÇÁĞ±í -->
-			<!-- ÊÕ²Ø±Ê¼ÇÁĞ±í -->
-			<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_7'>
-				<div class="pc_top_second">
-					<h3>ÒÑÊÕ²Ø±Ê¼Ç</h3>
-				</div>
-				<aside class="side-right" id='seventh_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body">
-								<ul class="contacts-list">
-									<!--li class="idle"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> switch¶à·ÖÖ§½á¹¹<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button></a></li-->
-								</ul>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</div>
-			<!-- ÊÕ²Ø±Ê¼ÇÁĞ±í -->
-			<!-- ²Î¼Ó»î¶¯µÄ±Ê¼ÇÁĞ±í -->
-			<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_8'>
-				<div class="pc_top_second">
-					<h3>²Î¼Ó»î¶¯µÄ±Ê¼Ç</h3>
-				</div>
-				<aside class="side-right" id='eighth_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body">
-								<ul class="contacts-list">
-									<!--li class="offline"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> ÑùÊ½ÓÃÀı£¨µã»÷ÎŞĞ§£©</a></li-->
-								</ul>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</div>
-			<!-- ²Î¼Ó»î¶¯µÄ±Ê¼ÇÁĞ±í -->
-			<!-- ±à¼­±Ê¼Ç -->
-			<div class="col-sm-7" id='pc_part_3' >
-				<!-- side-right -->
-				<div class="pc_top_third">
-					<div class="row">
-						<div class="col-xs-9">
-							<h3>±à¼­±Ê¼Ç</h3>
-						</div>
-						<div class="col-xs-3" id="save_button_div">
-							<button type="button" class="btn btn-block btn-sm btn-primary" id='save_note'>±£´æ±Ê¼Ç</button>
-						</div>
-					</div>
-				</div>
-				<aside class="side-right" id='third_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body clear_margin">
-								<!--- ±Ê¼Ç±êÌâ --->
-								<div class="row" >
-									<div class="col-xs-8">
-										<input type="text" class="form-control" id="input_note_title" placeholder='±Ê¼Ç±êÌâ...'>
-									</div>
-								</div>
-								<!--- ±Ê¼Ç±êÌâ --->
-								<div class="row">
-									<div class="col-sm-12">
-										<!--- ÊäÈë¿ò --->
-										<script type="text/plain" id="myEditor" style="width:100%;height:400px;">
-										</script>
-										<!--- ÊäÈë¿ò --->
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</div>
-			<!-- ±à¼­±Ê¼Ç -->
-			<!-- Ô¤ÀÀ±Ê¼Ç -->
-			<div class="col-sm-7" id='pc_part_5' style='display:none;' >
-				<div class="pc_top_third">
-					<div class="row">
-						<div class="col-xs-9">
-							<h3>Ô¤ÀÀ±Ê¼Ç</h3>
-						</div>
-					</div>
-				</div>
-				<aside class="side-right" id='fifth_side_right'>
-					<div class="module" data-toggle="niceScroll">
-						<div class="chat-contact">
-							<div class="contact-body clear_margin">
-								<h4 id="noput_note_title"></h4>
-								<p id="noput_note_body">
-								
-								</p>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</div>
-			<!-- Ô¤ÀÀ±Ê¼Ç -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>æˆ‘çš„ç¬”è®°</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="x-pjax-version" content="v173">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/favico-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/favico-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/favico-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="ico/favico-57-precomposed.png">
+	<link rel="shortcut icon" href="ico/favico.png">
+	<link rel="shortcut icon" href="ico/favico.ico">
+	<link rel="stylesheet" href="styles/icon.css"/>
+	<link rel="stylesheet" href="styles/main.css"/>
+	<!-- Google-Codeä»£ç é«˜äº®CSS -->
+	<link rel="stylesheet" href="styles/prettify.css"/>
+	<!-- Ueditorç¼–è¾‘å™¨CSS -->
+	<link href="styles/umeditor.min.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript"
+			src="scripts/jquery.min.js">
+	</script>
+	<script type="text/javascript"
+			src="scripts/cookie_util.js">
+	</script>
+	<script type="text/javascript"
+			src="scripts/base.js">
+	</script>
+	<script type="text/javascript"
+			src="scripts/notebook.js">
+	</script>
+	<script type="text/javascript"
+			src="scripts/note.js">
+	</script>
+	<script type="text/javascript"
+			src="scripts/alert.js">
+	</script>
+	<script type="text/javascript"
+			src="scripts/recycle.js">
+	</script>
+	<script type="text/javascript">
+        //ä»Cookieè·å–ç”¨æˆ·ID
+        var userId = getCookie("userId");
+        var um;
+        if(userId==null){//æœªç™»å½•ç”¨æˆ·
+            window.location.href="log_in.html";
+        }else{
+            //å…¶ä»–æ“ä½œ
+            $(function(){
+                //å®ä¾‹åŒ–Ueditorç¼–è¾‘å™¨
+                um = UM.getEditor('myEditor');
+                //å‘é€ajaxè¯·æ±‚åŠ è½½ç¬”è®°æœ¬åˆ—è¡¨
+                loadUserBooks();
+                //ç‚¹å‡»ç¬”è®°æœ¬åŠ è½½ç¬”è®°åˆ—è¡¨(åŠ¨æ€ç»‘å®šå•å‡»äº‹ä»¶)
+                $("#book_list").on("click","li",loadBookNotes);
+                //ç‚¹å‡»ç¬”è®°åŠ è½½ç¬”è®°ä¿¡æ¯
+                $("#note_list").on("click","li",loadNoteDetail);
+                //å¼¹å‡º"æ·»åŠ ç¬”è®°æœ¬"å¯¹è¯æ¡†
+                $("#add_notebook").click(showAddBookWindow);
+                //å…³é—­å¯¹è¯æ¡†
+                $("#can").on("click",".cancle,.close",closeWindow);
+                //ç¡®è®¤åˆ›å»ºç¬”è®°æœ¬
+                $("#can").on("click","#sure_addbook",sureAddBook);
+                //å¼¹å‡º"æ·»åŠ ç¬”è®°"å¯¹è¯æ¡†
+                $("#add_note").click(showAddNoteWindow);
+                //ç¡®è®¤åˆ›å»ºç¬”è®°
+                $("#can").on("click","#sure_addnote",sureAddNote);
+                //ä¿å­˜ç¬”è®°
+                $("#save_note").click(sureUpdateNote);
+                //æ˜¾ç¤ºç¬”è®°èœå•
+                showNoteMenu();
+                //å¼¹å‡ºæ”¾å…¥å›æ”¶ç«™å¯¹è¯æ¡†
+                $("#note_list").on("click",".btn_delete",showRecycleNoteWindow);
+                //ç¡®è®¤æ”¾å…¥å›æ”¶ç«™æ“ä½œ
+                $("#can").on("click","#sure_recyclenote",sureRecycleNote);
+                //åˆ†äº«ç¬”è®°
+                $("#note_list").on("click",".btn_share",sureShareNote);
+                //æœç´¢åˆ†äº«ç¬”è®°
+                $("#search_note").keydown(sureSearchShare);
+                //æœç´¢å‡ºæ¥çš„åˆ†äº«ç¬”è®°é¢„è§ˆ
+                $("#search_list").on("click","li",viewShareNote);
+                //å¼¹å‡ºè½¬ç§»ç¬”è®°å¯¹è¯æ¡†
+                $("#note_list").on("click",".btn_move",showMoveNoteWindow);
+                //ç¡®å®šè½¬ç§»ç¬”è®°æ“ä½œ
+                $("#can").on("click","#sure_movenote",function(){
+                    //è·å–è¯·æ±‚å‚æ•°
+                    var $noteLi =
+                        $("#note_list a.checked").parent();
+                    var noteId = $noteLi.data("noteId");
+                    var bookId = $("#moveSelect").val();
+                    //TODO æ£€æŸ¥æ˜¯å¦é€‰æ‹©ç¬”è®°æœ¬
+                    //TODO æ£€æŸ¥æ˜¯å¦å’ŒåŸç¬”è®°æœ¬ä¸€æ ·
+                    //å‘é€Ajaxè¯·æ±‚
+                    $.ajax({
+                        url:base_url+"/note/move.do",
+                        type:"post",
+                        data:{"noteId":noteId,"bookId":bookId},
+                        dataType:"json",
+                        success:function(result){
+                            if(result.status==0){
+                                closeWindow();//å…³é—­å¯¹è¯æ¡†
+                                $noteLi.remove();//ç§»é™¤ç¬”è®°
+                                alert(result.msg);//æç¤ºæˆåŠŸ
+                            }
+                        },
+                        error:function(){
+                            alert("è½¬ç§»ç¬”è®°å¤±è´¥");
+                        }
+                    });
+                });
+            });
+        }
+	</script>
+</head>
+<body class="animated fadeIn">
+<header class="header">
+	<div class="header-brand">
+		<a data-pjax=".content-body" href="edit.html">
+			<img class="brand-logo" src="images/dummy/8986f28e.stilearn-logo.png" alt="Stilearn Admin Sample Logo">
+		</a>
+	</div>
+	<div class="header-profile">
+		<div class="profile-nav">
+			<span class="profile-username"></span>
+			<a  class="dropdown-toggle" data-toggle="dropdown">
+				<span class="fa fa-angle-down"></span>
+			</a>
+			<ul class="dropdown-menu animated flipInX pull-right" role="menu">
+				<li><a href="Change_password.html"><i class="fa fa-user"></i> ä¿®æ”¹å¯†ç </a></li>
+				<li class="divider"></li>
+				<li><a id="logout" href="#" ><i class="fa fa-sign-out"></i> é€€å‡ºç™»å½•</a></li>
+			</ul>
 		</div>
-        <footer>
-            <p>&copy; 2014 Stilearning</p>
-			<div style='position:absolute;top:5PX;height:30px;right:20px;line-height:26px;border:1px solid #0E7D76;display:none;background:#fff'>
-				<strong style='color:#0E7D76;margin:0 10px;'></strong>
+	</div>
+	<form class="form-inline" onsubmit="return false;">
+		<button type="button" class="btn btn-default btn-expand-search"><i class="fa fa-search"></i></button>
+		<div class="toggle-search">
+			<input type="text" class="form-control" placeholder="æœç´¢ç¬”è®°" id='search_note'>
+			<button type="button" class="btn btn-default btn-collapse-search"><i class="fa fa-times"></i></button>
+		</div>
+	</form>
+	<ul class="hidden-xs header-menu pull-right">
+		<li>
+			<a href="activity.html" target='_blank' title="ç¬”è®°æ´»åŠ¨">æ´»åŠ¨</a>
+		</li>
+	</ul>
+</header>
+<div class="row" style='padding:0;' id='center'>
+	<!-- alert_background-->
+	<div class="opacity_bg" style='display:none'></div>
+	<!-- alert_notebook -->
+	<div id="can"></div>
+	<div class="col-xs-2" style='padding:0;' id='pc_part_1'>
+		<!-- side-right -->
+		<div class="pc_top_first">
+			<h3>å…¨éƒ¨ç¬”è®°æœ¬</h3>
+			<button type="button" class="btn btn-default btn-xs btn_plus" id='add_notebook'><i class="fa fa-plus"></i></button>
+		</div>
+		<aside class="side-right" id='first_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body">
+						<ul id="book_list" class="contacts-list">
+							<!-- åŠ¨æ€ç”Ÿæˆç¬”è®°æœ¬liåˆ—è¡¨ -->
+						</ul>
+					</div>
+				</div>
 			</div>
-        </footer>
-		<script type="text/javascript">
-			//¼ÓÔØDOMÖ®ºó´¦ÀíÒ³Ãæ¸ß¶È
-			function get_dom(e){
-				return document.getElementById(e);
-			}
-			function set_height(){
-				var pc_height=window.innerHeight;
-				pc_height=pc_height-132;
-				get_dom('first_side_right').style.height=(pc_height-31)+'px';
-				get_dom('second_side_right').style.height=pc_height+'px';
-				get_dom('four_side_right').style.height=pc_height+'px';
-				get_dom('sixth_side_right').style.height=pc_height+'px';
-				get_dom('seventh_side_right').style.height=pc_height+'px';
-				get_dom('eighth_side_right').style.height=pc_height+'px';
-				get_dom('third_side_right').style.height=(pc_height-15)+'px';
-				get_dom('fifth_side_right').style.height=(pc_height-15)+'px';
-			}
-			function myEditorWidth(){
-				var dom=get_dom('third_side_right');
-				var style=dom.currentStyle||window.getComputedStyle(dom, null);
-				get_dom('myEditor').style.width=style.width;
-			}
-			set_height();
-			//¸Ä±ä´°¿Ú´óĞ¡Ê±µ÷ÕûÒ³Ãæ³ß´ç
-			window.onresize=function(){
-				set_height();
-				var width=$('#third_side_right').width()-35;
-				$('.edui-container,.edui-editor-body').width(width);
-				$('#myEditor').width(width-20);
-			};
-		</script>
-        <script type="text/javascript" src="scripts/jquery.min.js"></script>
+		</aside>
+		<div class="row clear_margin">
+			<div class="col-xs-4 click" id='rollback_button' title='å›æ”¶ç«™'><i class='fa fa-trash-o' style='font-size:20px;line-height:31px;'></i></div>
+			<div class="col-xs-4 click" id='like_button' title='æ”¶è—ç¬”è®°æœ¬'><i class='fa fa-star' style='font-size:20px;line-height:31px;'></i></div>
+			<div class="col-xs-4 click" id='action_button' title='å‚åŠ æ´»åŠ¨ç¬”è®°'><i class='fa fa-users' style='font-size:20px;line-height:30px;'></i></div>
+		</div>
+	</div>
+	<!-- å…¨éƒ¨ç¬”è®°æœ¬ -->
+	<!-- å…¨éƒ¨ç¬”è®° -->
+	<div class="col-xs-3" style='padding:0;' id='pc_part_2'>
+		<div class="pc_top_second" id='notebookId'>
+			<h3>å…¨éƒ¨ç¬”è®°</h3>
+			<button type="button" class="btn btn-default btn-xs btn_plus" id='add_note'><i class="fa fa-plus"></i></button>
+		</div>
+		<aside class="side-right" id='second_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body">
+						<ul id="note_list" class="contacts-list">
+							<!-- åŠ¨æ€åŠ è½½ç¬”è®°åˆ—è¡¨li -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+	<!-- å…¨éƒ¨ç¬”è®° -->
+	<!-- å›æ”¶ç«™ç¬”è®° -->
+	<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_4'>
+		<div class="pc_top_second">
+			<h3>å›æ”¶ç«™ç¬”è®°</h3>
+		</div>
+		<aside class="side-right" id='four_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body">
+						<ul class="contacts-list">
+							<li class="disable"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> è™šå‡å›æ”¶ç«™ç¬”è®°<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button><button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay"><i class="fa fa-reply"></i></button></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+	<!-- å›æ”¶ç«™ç¬”è®° -->
+	<!-- æœç´¢ç¬”è®°åˆ—è¡¨ -->
+	<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_6'>
+		<div class="pc_top_second">
+			<h3>æœç´¢ç»“æœ</h3>
+		</div>
+		<aside class="side-right" id='sixth_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body">
+						<ul id="search_list" class="contacts-list">
+						</ul>
+					</div>
+				</div>
+				<div id='more_note'>æ›´å¤š...</div>
+			</div>
+		</aside>
+	</div>
+	<!-- æœç´¢ç¬”è®°åˆ—è¡¨ -->
+	<!-- æ”¶è—ç¬”è®°åˆ—è¡¨ -->
+	<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_7'>
+		<div class="pc_top_second">
+			<h3>å·²æ”¶è—ç¬”è®°</h3>
+		</div>
+		<aside class="side-right" id='seventh_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body">
+						<ul class="contacts-list">
+							<!--li class="idle"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> switchå¤šåˆ†æ”¯ç»“æ„<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button></a></li-->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+	<!-- æ”¶è—ç¬”è®°åˆ—è¡¨ -->
+	<!-- å‚åŠ æ´»åŠ¨çš„ç¬”è®°åˆ—è¡¨ -->
+	<div class="col-xs-3" style='padding:0;display:none;' id='pc_part_8'>
+		<div class="pc_top_second">
+			<h3>å‚åŠ æ´»åŠ¨çš„ç¬”è®°</h3>
+		</div>
+		<aside class="side-right" id='eighth_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body">
+						<ul class="contacts-list">
+							<!--li class="offline"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> æ ·å¼ç”¨ä¾‹ï¼ˆç‚¹å‡»æ— æ•ˆï¼‰</a></li-->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+	<!-- å‚åŠ æ´»åŠ¨çš„ç¬”è®°åˆ—è¡¨ -->
+	<!-- ç¼–è¾‘ç¬”è®° -->
+	<div class="col-sm-7" id='pc_part_3' >
+		<!-- side-right -->
+		<div class="pc_top_third">
+			<div class="row">
+				<div class="col-xs-9">
+					<h3>ç¼–è¾‘ç¬”è®°</h3>
+				</div>
+				<div class="col-xs-3" id="save_button_div">
+					<button type="button" class="btn btn-block btn-sm btn-primary" id='save_note'>ä¿å­˜ç¬”è®°</button>
+				</div>
+			</div>
+		</div>
+		<aside class="side-right" id='third_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body clear_margin">
+						<!--- ç¬”è®°æ ‡é¢˜ --->
+						<div class="row" >
+							<div class="col-xs-8">
+								<input type="text" class="form-control" id="input_note_title" placeholder='ç¬”è®°æ ‡é¢˜...'>
+							</div>
+						</div>
+						<!--- ç¬”è®°æ ‡é¢˜ --->
+						<div class="row">
+							<div class="col-sm-12">
+								<!--- è¾“å…¥æ¡† --->
+								<script type="text/plain" id="myEditor" style="width:100%;height:400px;">
+								</script>
+								<!--- è¾“å…¥æ¡† --->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+	<!-- ç¼–è¾‘ç¬”è®° -->
+	<!-- é¢„è§ˆç¬”è®° -->
+	<div class="col-sm-7" id='pc_part_5' style='display:none;' >
+		<div class="pc_top_third">
+			<div class="row">
+				<div class="col-xs-9">
+					<h3>é¢„è§ˆç¬”è®°</h3>
+				</div>
+			</div>
+		</div>
+		<aside class="side-right" id='fifth_side_right'>
+			<div class="module" data-toggle="niceScroll">
+				<div class="chat-contact">
+					<div class="contact-body clear_margin">
+						<h4 id="noput_note_title"></h4>
+						<p id="noput_note_body">
 
-		<!-- Bootstrap¿ò¼ÜJS -->
-        <script src="scripts/bootstrap.min.js"></script>
-        <script src="scripts/js-prototype.js"></script>       
-        <script src="scripts/theme-setup.js"></script>
-		<!-- Google-Code´úÂë¸ßÁÁJS -->
-        <script class="re-execute" src="scripts/run_prettify.js"></script>
-		<!-- Ueditor±à¼­Æ÷JS -->
-		<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.config.js"></script>
-		<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.min.js"></script>
-		<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
-		
-		<script type="text/javascript">
-			//ÖØĞ´JSÔ­Éúalertº¯Êı
-			
-				window.alert=function(e){
-					$('#can').load('./alert/alert_error.html',function(){
-						$('#error_info').text(' '+e);
-						$('.opacity_bg').show();
-					});
-				}
-			
-		</script>
-		</body>		
+						</p>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+	<!-- é¢„è§ˆç¬”è®° -->
+</div>
+<footer>
+	<p>&copy; 2014 Stilearning</p>
+	<div style='position:absolute;top:5PX;height:30px;right:20px;line-height:26px;border:1px solid #0E7D76;display:none;background:#fff'>
+		<strong style='color:#0E7D76;margin:0 10px;'></strong>
+	</div>
+</footer>
+<script type="text/javascript">
+    //åŠ è½½DOMä¹‹åå¤„ç†é¡µé¢é«˜åº¦
+    function get_dom(e){
+        return document.getElementById(e);
+    }
+    function set_height(){
+        var pc_height=window.innerHeight;
+        pc_height=pc_height-132;
+        get_dom('first_side_right').style.height=(pc_height-31)+'px';
+        get_dom('second_side_right').style.height=pc_height+'px';
+        get_dom('four_side_right').style.height=pc_height+'px';
+        get_dom('sixth_side_right').style.height=pc_height+'px';
+        get_dom('seventh_side_right').style.height=pc_height+'px';
+        get_dom('eighth_side_right').style.height=pc_height+'px';
+        get_dom('third_side_right').style.height=(pc_height-15)+'px';
+        get_dom('fifth_side_right').style.height=(pc_height-15)+'px';
+    }
+    function myEditorWidth(){
+        var dom=get_dom('third_side_right');
+        var style=dom.currentStyle||window.getComputedStyle(dom, null);
+        get_dom('myEditor').style.width=style.width;
+    }
+    set_height();
+    //æ”¹å˜çª—å£å¤§å°æ—¶è°ƒæ•´é¡µé¢å°ºå¯¸
+    window.onresize=function(){
+        set_height();
+        var width=$('#third_side_right').width()-35;
+        $('.edui-container,.edui-editor-body').width(width);
+        $('#myEditor').width(width-20);
+    };
+</script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+
+<!-- Bootstrapæ¡†æ¶JS -->
+<script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/js-prototype.js"></script>
+<script src="scripts/theme-setup.js"></script>
+<!-- Google-Codeä»£ç é«˜äº®JS -->
+<script class="re-execute" src="scripts/run_prettify.js"></script>
+<!-- Ueditorç¼–è¾‘å™¨JS -->
+<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.min.js"></script>
+<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
+
+<script type="text/javascript">
+    //é‡å†™JSåŸç”Ÿalertå‡½æ•°
+
+    window.alert=function(e){
+        $('#can').load('./alert/alert_error.html',function(){
+            $('#error_info').text(' '+e);
+            $('.opacity_bg').show();
+        });
+    }
+
+</script>
+</body>
 </html>

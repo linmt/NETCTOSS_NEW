@@ -9,5 +9,10 @@ User、UserDao、TestUserDao、UserMapper.xml
 181129
 登录功能
 之前创建了：User、UserDao、UserMapper、TestUserDao
-log_in.html、NoteResult<T>、UserService、UserServiceImpl、TestUserService
+log_in.html、NoteResult<T>、UserService、UserServiceImpl、TestUserService、UserLoginController
+
+加密功能
+NoteUtil、更改"我的sql.sql"文件密码为gdyb21LQTcIANtvYMT7QVQ==，对应1234
+
+
 

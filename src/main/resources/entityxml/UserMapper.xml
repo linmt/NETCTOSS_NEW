@@ -6,16 +6,8 @@
     </select>
 
     <insert id="save" parameterType="com.lmt.entity.User">
-        insert into cn_user(
-            cn_user_id,
-            cn_user_name,
-            cn_user_password,
-            cn_user_token,
-            cn_user_desc
-        )values(
-            #{cn_user_id},
-            #{cn_user_name},
-            #{cn_user_password},
+        insert into cn_user(cn_user_id,cn_user_name,cn_user_password,cn_user_token,cn_user_desc
+        )values(#{cn_user_id},#{cn_user_name},#{cn_user_password},
             #{cn_user_token},
             #{cn_user_desc}
         )

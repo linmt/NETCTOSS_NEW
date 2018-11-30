@@ -1,12 +1,14 @@
 package com.lmt.controller.user;
 
+import com.lmt.entity.NoteResult;
 import com.lmt.service.UserService;
-import com.lmt.util.NoteResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by 张洲徽 on 2018/11/29.
@@ -19,8 +21,7 @@ public class UserLoginController {
 
     @RequestMapping("/login.form")
     @ResponseBody
-    public NoteResult execute(String name,String password){
-        //System.out.println("执行execute");
+    public NoteResult execute(@RequestParam("name") String name, @RequestParam("password")String password) throws NoSuchAlgorithmException {
         NoteResult result =userService.checkLogin(name, password);
         return result;
     }

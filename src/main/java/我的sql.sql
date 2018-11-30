@@ -33,6 +33,9 @@ INSERT INTO cn_user VALUES ('ea09d9b1-ede7-4bd8-b43d-a546680df00b', 'yht', '96e7
 insert into cn_user values ('1','cat','123',null,null);
 commit;
 
+update cn_user t set t.cn_user_password='gdyb21LQTcIANtvYMT7QVQ==';
+commit;
+
 -- ----------------------------
 -- Table structure for cn_notebook_type
 -- ----------------------------

@@ -8,32 +8,35 @@
 	<script type="text/javascript">
 		$(function(){
 		    $("#login").click(function () {
-				//alert("测试是否能调用此函数");
-				//获取参数
+                $("#count_span").html("");
+                $("#password_span").html("");
+		        //获取参数
 				var name=$("#count").val().trim();
 				var password=$("#password").val().trim();
 				var ok=true;
-				if(name=""){
+				if(name==""){
                     $("#count_span").html("用户名不能为空");
                     ok=false;
 				}
-                if(password=""){
+                if(password==""){
                     $("#password_span").html("密码不能为空");
                     ok=false;
                 }
                 //发送请求
 				if(ok){
                     $.ajax({
+                        //为何14 unit2-1  1.51.25  写的是完整路径
                         url:'/user/login.form',
 						type:'post',
-						data:{'name':name,'password':password},
+						data:{"name":name,"password":password},
                         dataType:'json',
-                        success:function(data){
-                            $('#tb1').empty();
-                            for(i = 0;i < data.length;i ++){
-                                var s = data[i];
-                                $('#tb1').append('<tr><td>' + s.code+ '</td><td>' + s.name
-                                    + '</td><td>' + s.price + '</td></tr>');
+                        success:function(result){
+                            if(result.status==0){
+                                window.location.href="index.jsp";
+							}else if(result.status==1){
+								$("#count_span").html(result.msg);
+							}else if(result.status==2){
+                                $("#password_span").html(result.msg);
                             }
                         },
                         error:function(){
