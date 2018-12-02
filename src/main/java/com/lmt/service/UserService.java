@@ -10,4 +10,5 @@ import java.security.NoSuchAlgorithmException;
  */
 public interface UserService {
     public NoteResult<User> checkLogin(String name,String password) throws NoSuchAlgorithmException;
+    public NoteResult regist(String name,String password,String nickName) throws NoSuchAlgorithmException;
 }

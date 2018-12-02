@@ -17,7 +17,8 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
 
-    public NoteResult<User> checkLogin(String name, String password) throws NoSuchAlgorithmException {
+    public NoteResult<User> checkLogin(String name, String password)
+            throws NoSuchAlgorithmException {
         NoteResult<User> result=new NoteResult<User>();
         User user=userDao.findByName(name);
         if(user==null){
@@ -35,6 +36,30 @@ public class UserServiceImpl implements UserService {
         //14 发送用户id
         //result.setData(user.getCn_user_id());
         result.setData(user);
+        return result;
+    }
+    public NoteResult regist(String name, String password, String nickName)
+            throws NoSuchAlgorithmException {
+        NoteResult result = new NoteResult();
+        //必要数据检查
+        User has_user = userDao.findByName(name);
+        if(has_user != null){
+            result.setStatus(1);
+            result.setMsg("用户名已被占用");
+            return result;
+        }
+        //添加处理
+        User user = new User();
+        user.setCn_user_name(name);//用户名
+        user.setCn_user_desc(nickName);//昵称
+        String md5_password = NoteUtil.md5(password);
+        user.setCn_user_password(md5_password);//设置密码
+        user.setCn_user_token(null);//令牌
+        String userId = NoteUtil.createId();
+        user.setCn_user_id(userId);//用户ID
+        userDao.save(user);
+        result.setStatus(0);
+        result.setMsg("注册成功");
         return result;
     }
 }

@@ -4,6 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 /**
  * Created by 张洲徽 on 2018/11/30.
@@ -25,5 +26,9 @@ public class NoteUtil {
     public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println(md5("1234"));
         System.out.println(md5("adfsdafasdfadf"));
+    }
+    public static String createId(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 }

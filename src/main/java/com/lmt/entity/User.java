@@ -44,11 +44,11 @@ public class User implements Serializable {
         this.cn_user_token = cn_user_token;
     }
 
-    public String getCn_user_nick() {
+    public String getCn_user_desc() {
         return cn_user_desc;
     }
 
-    public void setCn_user_nick(String cn_user_nick) {
+    public void setCn_user_desc(String cn_user_desc) {
         this.cn_user_desc = cn_user_desc;
     }
 
