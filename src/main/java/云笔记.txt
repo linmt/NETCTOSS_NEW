@@ -9,10 +9,19 @@ User、UserDao、TestUserDao、UserMapper.xml
 181129
 登录功能
 之前创建了：User、UserDao、UserMapper、TestUserDao
-log_in.html、NoteResult<T>、UserService、UserServiceImpl、TestUserService、UserLoginController
+新创建：log_in.html、NoteResult<T>、UserService、UserServiceImpl、TestUserService、UserLoginController
 
 加密功能
-NoteUtil、更改"我的sql.sql"文件密码为gdyb21LQTcIANtvYMT7QVQ==，对应1234
+NoteUtil、UserServiceImpl
+更改"我的sql.sql"文件密码为gdyb21LQTcIANtvYMT7QVQ==，对应1234
+
+保存登陆信息
+log_in.html、UserLoginController
+引用了cookie_util.js
+log_in.html中关于发送登陆请求，接收用户id，保存登陆cookie的功能可以封装在login.js
+
+注册
+UserMapper
 
 
 

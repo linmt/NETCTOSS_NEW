@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
         }
         result.setStatus(0);
         result.setMsg("登录成功");
+        //14 发送用户id
+        //result.setData(user.getCn_user_id());
         result.setData(user);
         return result;
     }

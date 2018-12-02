@@ -10,8 +10,11 @@
         <module name="NETCTOSS_NEW" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="1.7">
       <module name="NETCTOSS_NEW" target="1.5" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
   </component>
 </project>
