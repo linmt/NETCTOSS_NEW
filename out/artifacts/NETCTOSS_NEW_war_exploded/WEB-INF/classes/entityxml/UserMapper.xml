@@ -6,10 +6,13 @@
     </select>
 
     <insert id="save" parameterType="com.lmt.entity.User">
-        insert into cn_user(cn_user_id,cn_user_name,cn_user_password,cn_user_token,cn_user_desc
-        )values(#{cn_user_id},#{cn_user_name},#{cn_user_password},
-            #{cn_user_token},
-            #{cn_user_desc}
-        )
+        <!--插入空值时报错（with JdbcType OTHER）-->
+        <!--解决办法一：-->
+        <!--
+        insert into cn_user(cn_user_id,cn_user_name,cn_user_password,cn_user_token,cn_user_desc)
+        values(#{cn_user_id},#{cn_user_name},#{cn_user_password},#{cn_user_token,jdbcType=VARCHAR},#{cn_user_desc})
+        -->
+        insert into cn_user(cn_user_id,cn_user_name,cn_user_password,cn_user_token,cn_user_desc)
+        values(#{cn_user_id},#{cn_user_name},#{cn_user_password},#{cn_user_token,jdbcType=VARCHAR},#{cn_user_desc})
     </insert>
 </mapper>
