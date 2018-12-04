@@ -1,65 +1,66 @@
-//¼ÓÔØÓÃ»§±Ê¼Ç±¾ÁĞ±í
+//åŠ è½½ç”¨æˆ·ç¬”è®°æœ¬åˆ—è¡¨
 function loadUserBooks(){
- $.ajax({
-	url:base_url+"/notebook/loadbooks.do",
-	type:"post",
-	data:{"userId":userId},
-	dataType:"json",
-	success:function(result){
-		if(result.status==0){
-			var books = result.data;//±Ê¼Ç±¾Êı×é
-			for(var i=0;i<books.length;i++){
-				var bookName = books[i].cn_notebook_name;
-				var bookId = books[i].cn_notebook_id;
-				//Æ´Ò»¸öliÔªËØ
-				createBookLi(bookName,bookId);
-			}
-		}
-	},
-	error:function(){
-		alert("¼ÓÔØ±Ê¼Ç±¾ÁĞ±íÊ§°Ü");
-	}
-});
+    $.ajax({
+        //url:base_url+"/notebook/loadbooks.do",
+        url:"/notebook/loadbooks.form",
+        type:"post",
+        data:{"userId":userId},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                var books = result.data;//ç¬”è®°æœ¬æ•°ç»„
+                for(var i=0;i<books.length;i++){
+                    var bookName = books[i].cn_notebook_name;
+                    var bookId = books[i].cn_notebook_id;
+                    //æ‹¼ä¸€ä¸ªliå…ƒç´ 
+                    createBookLi(bookName,bookId);
+                }
+            }
+        },
+        error:function(){
+            alert("åŠ è½½ç¬”è®°æœ¬åˆ—è¡¨å¤±è´¥");
+        }
+    });
 };
-//×·¼ÓÒ»¸ö±Ê¼Ç±¾li
+//è¿½åŠ ä¸€ä¸ªç¬”è®°æœ¬li
 function createBookLi(bookName,bookId){
-	var s_li ='<li class="online">';
-		s_li+='	<a>';
-		s_li+='	<i class="fa fa-book" title="online" rel="tooltip-bottom">';
-		s_li+='	</i>'+bookName;
-		s_li+='	</a>';
-		s_li+='</li>';
-		//½«bookIdºÍliÔªËØ°ó¶¨
-		var $li = $(s_li);
-		$li.data("bookId",bookId);
-		//½«liÔªËØÌí¼Óµ½ul
-		$("#book_list").append($li);
+    var s_li ='<li class="online">';
+    s_li+='	<a>';
+    s_li+='	<i class="fa fa-book" title="online" rel="tooltip-bottom">';
+    s_li+='	</i>'+bookName;
+    s_li+='	</a>';
+    s_li+='</li>';
+    //å°†bookIdå’Œliå…ƒç´ ç»‘å®š
+    var $li = $(s_li);
+    $li.data("bookId",bookId);
+    //å°†liå…ƒç´ æ·»åŠ åˆ°ul
+    $("#book_list").append($li);
 };
 
-//È·ÈÏ´´½¨±Ê¼Ç±¾
+//ç¡®è®¤åˆ›å»ºç¬”è®°æœ¬
 function sureAddBook(){
-	//»ñÈ¡ÇëÇó²ÎÊı
-	var bookName = $("#input_notebook").val().trim();
-	//TODO ¼ì²é¸ñÊ½
-	//·¢ËÍAjaxÇëÇó
-	$.ajax({
-		url:base_url+"/notebook/add.do",
-		type:"post",
-		data:{"userId":userId,"bookName":bookName},
-		dataType:"json",
-		success:function(result){
-			if(result.status==0){
-				//¹Ø±Õ¶Ô»°¿ò
-				closeWindow();
-				//Ìí¼ÓÒ»¸ö±Ê¼Ç±¾li
-				var bookId = result.data;
-				createBookLi(bookName,bookId);
-				//ÌáÊ¾³É¹¦
-				alert(result.msg);
-			}
-		},
-		error:function(){
-			alert("´´½¨±Ê¼Ç±¾Ê§°Ü");
-		}
-	});
+    //è·å–è¯·æ±‚å‚æ•°
+    var bookName = $("#input_notebook").val().trim();
+    //TODO æ£€æŸ¥æ ¼å¼
+    //å‘é€Ajaxè¯·æ±‚
+    $.ajax({
+        url:base_url+"/notebook/add.do",
+        type:"post",
+        data:{"userId":userId,"bookName":bookName},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                //å…³é—­å¯¹è¯æ¡†
+                closeWindow();
+                //æ·»åŠ ä¸€ä¸ªç¬”è®°æœ¬li
+                var bookId = result.data;
+                createBookLi(bookName,bookId);
+                //æç¤ºæˆåŠŸ
+                alert(result.msg);
+            }
+        },
+        error:function(){
+            alert("åˆ›å»ºç¬”è®°æœ¬å¤±è´¥");
+        }
+    });
 };

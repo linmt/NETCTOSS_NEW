@@ -1,63 +1,63 @@
 $(function(){
-	$("#regist_button").click(function(){
-		//Çå³ıÌáÊ¾ĞÅÏ¢
-		$("#warning_1").hide();
-		$("#warning_2").hide();
-		$("#warning_3").hide();
-		$("#warning_4").hide();
-		//»ñÈ¡ÇëÇó²ÎÊı
-		var name = $("#regist_username").val().trim();
-		var nick = $("#nickname").val().trim();
-		var password = $("#regist_password").val().trim();
-		var final_password = $("#final_password").val().trim();
-		//¼ì²é¸ñÊ½
-		var ok = true;
-		if(name==""){
-			ok = false;
-			$("#warning_1 span").html("ÓÃ»§ÃûÎª¿Õ");
-			$("#warning_1").show();
-		}
-		if(nick==""){
-			ok = false;
-			$("#warning_4 span").html("êÇ³ÆÎª¿Õ");
-			$("#warning_4").show();
-		}
-		if(password==""){
-			ok = false;
-			$("#warning_2 span").html("ÃÜÂëÎª¿Õ");
-			$("#warning_2").show();
-		}else{
-			if(password.length<6){
-				ok = false;
-				$("#warning_2 span").html("ÃÜÂëĞèÒª6Î»ÒÔÉÏ");
-				$("#warning_2").show();
-			}
-		}
-		if(final_password != password){
-			ok = false;
-			$("#warning_3 span").html("ÓëÃÜÂë²»Ò»ÖÂ");
-			$("#warning_3").show();
-		}
-		//·¢ËÍAjax
-		if(ok){
-			$.ajax({
-				url:base_url+"/user/regist.do",
-				type:"post",
-				data:{"name":name,"password":password,"nick":nick},
-				dataType:"json",
-				success:function(result){
-					if(result.status==0){//³É¹¦
-						alert(result.msg);//ÌáÊ¾
-						$("#back").click();//ÇĞ»»µ½µÇÂ¼½çÃæ
-					}else if(result.status==1){//ÓÃ»§ÃûÕ¼ÓÃ
-						$("#warning_1 span").html(result.msg);
-						$("#warning_1").show();
-					}
-				},
-				error:function(){
-					alert("×¢²áÊ§°Ü,ÉÔºóÖØÊÔ");
-				}
-			});
-		}
-	});
+    $("#regist_button").click(function(){
+        //æ¸…é™¤æç¤ºä¿¡æ¯
+        $("#warning_1").hide();
+        $("#warning_2").hide();
+        $("#warning_3").hide();
+        $("#warning_4").hide();
+        //è·å–è¯·æ±‚å‚æ•°
+        var name = $("#regist_username").val().trim();
+        var nick = $("#nickname").val().trim();
+        var password = $("#regist_password").val().trim();
+        var final_password = $("#final_password").val().trim();
+        //æ£€æŸ¥æ ¼å¼
+        var ok = true;
+        if(name==""){
+            ok = false;
+            $("#warning_1 span").html("ç”¨æˆ·åä¸ºç©º");
+            $("#warning_1").show();
+        }
+        if(nick==""){
+            ok = false;
+            $("#warning_4 span").html("æ˜µç§°ä¸ºç©º");
+            $("#warning_4").show();
+        }
+        if(password==""){
+            ok = false;
+            $("#warning_2 span").html("å¯†ç ä¸ºç©º");
+            $("#warning_2").show();
+        }else{
+            if(password.length<6){
+                ok = false;
+                $("#warning_2 span").html("å¯†ç éœ€è¦6ä½ä»¥ä¸Š");
+                $("#warning_2").show();
+            }
+        }
+        if(final_password != password){
+            ok = false;
+            $("#warning_3 span").html("ä¸å¯†ç ä¸ä¸€è‡´");
+            $("#warning_3").show();
+        }
+        //å‘é€Ajax
+        if(ok){
+            $.ajax({
+                url:base_url+"/user/regist.form",
+                type:"post",
+                data:{"name":name,"password":password,"nick":nick},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==0){//æˆåŠŸ
+                        alert(result.msg);//æç¤º
+                        $("#back").click();//åˆ‡æ¢åˆ°ç™»å½•ç•Œé¢
+                    }else if(result.status==1){//ç”¨æˆ·åå ç”¨
+                        $("#warning_1 span").html(result.msg);
+                        $("#warning_1").show();
+                    }
+                },
+                error:function(){
+                    alert("æ³¨å†Œå¤±è´¥,ç¨åé‡è¯•");
+                }
+            });
+        }
+    });
 });

@@ -23,5 +23,8 @@ log_in.html中关于发送登陆请求，接收用户id，保存登陆cookie的�
 注册
 UserMapper、UserDao、UserService、UserServiceImpl、NoteUtil、TestUserDao、UserRegistController、log_in.html
 
+笔记本列表
+NoteBook、NoteBookMapper、BookDao、BookService、BookServiceImpl、LoadBooksController、notebook.js、edit.html
+
 
 

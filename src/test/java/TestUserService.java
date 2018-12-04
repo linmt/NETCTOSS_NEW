@@ -1,9 +1,6 @@
-import com.lmt.entity.User;
 import com.lmt.service.UserService;
-import com.lmt.entity.NoteResult;
 
 import javax.annotation.Resource;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by 张洲徽 on 2018/11/29.
@@ -11,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 public class TestUserService extends BaseJunit4Test {
     @Resource
     private UserService userService;
-
+/*
     @org.junit.Test
     //测试用户名不存在
     public void test1( ) throws NoSuchAlgorithmException {
@@ -32,4 +29,5 @@ public class TestUserService extends BaseJunit4Test {
         NoteResult<User> noteResult=userService.checkLogin("cat","123");
         System.out.println(noteResult.getStatus()+"  "+noteResult.getMsg()+"  "+noteResult.getData());
     }
+    */
 }

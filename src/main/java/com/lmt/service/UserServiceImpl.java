@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
 
+    /*
     public NoteResult<User> checkLogin(String name, String password)
             throws NoSuchAlgorithmException {
         NoteResult<User> result=new NoteResult<User>();
@@ -36,6 +37,28 @@ public class UserServiceImpl implements UserService {
         //14 发送用户id
         //result.setData(user.getCn_user_id());
         result.setData(user);
+        return result;
+    }
+    */
+    public NoteResult<String> checkLogin(String name, String password)
+            throws NoSuchAlgorithmException {
+        NoteResult<String> result=new NoteResult<String>();
+        User user=userDao.findByName(name);
+        if(user==null){
+            result.setStatus(1);
+            result.setMsg("用户名不存在");
+            return result;
+        }
+        if(!user.getCn_user_password().equals(NoteUtil.md5(password))){
+            result.setStatus(2);
+            result.setMsg("密码错误");
+            return result;
+        }
+        result.setStatus(0);
+        result.setMsg("登录成功");
+        //14 发送用户id
+        result.setData(user.getCn_user_id());
+        //result.setData(user);
         return result;
     }
     public NoteResult regist(String name, String password, String nickName)

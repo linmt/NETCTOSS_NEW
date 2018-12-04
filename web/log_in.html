@@ -34,9 +34,10 @@
                         success:function(result){
                             if(result.status==0){
                                 //14  获取用户ID，写入cookie
-								var userId=result.data.cn_user_id;
-								addCookie("uid",userId,2);
-                                window.location.href="index.jsp";
+								//var userId=result.data.cn_user_id;
+                                var userId=result.data;
+								addCookie("userId",userId,2);
+                                window.location.href="edit.html";
 							}else if(result.status==1){
 								$("#count_span").html(result.msg);
 							}else if(result.status==2){
