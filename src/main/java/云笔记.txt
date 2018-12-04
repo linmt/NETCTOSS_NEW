@@ -21,7 +21,7 @@ log_in.html、UserLoginController
 log_in.html中关于发送登陆请求，接收用户id，保存登陆cookie的功能可以封装在login.js
 
 注册
-UserMapper、UserDao、UserService、UserServiceImpl、NoteUtil、TestUserDao、UserRegistController
+UserMapper、UserDao、UserService、UserServiceImpl、NoteUtil、TestUserDao、UserRegistController、log_in.html
 
 
 
