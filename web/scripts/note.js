@@ -5,14 +5,16 @@ function loadBookNotes(){
     //切换成编辑区
     $("#pc_part_3").show();
     $("#pc_part_5").hide();
-    //将当前笔记本li设置成选中状态
+    //清楚非当前笔记本li的选中状态
     $("#book_list li a").removeClass("checked");
+    //将当前笔记本li设置成选中状态
+    //也可以用children
     $(this).find("a").addClass("checked");
     //获取请求参数
     var bookId = $(this).data("bookId");
     //发送Ajax请求
     $.ajax({
-        url:base_url+"/note/loadnotes.do",
+        url:"/note/loadnotes.form",
         type:"post",
         data:{"bookId":bookId},
         dataType:"json",
@@ -33,6 +35,14 @@ function loadBookNotes(){
             alert("加载笔记列表失败");
         }
     });
+};
+
+//切换列表显示
+function showNoteList(index){
+    //将所有列表隐藏
+    $(".col-xs-3:not('#save_button_div')").hide();
+    //将指定列表显示
+    $("#pc_part_"+index).show();
 };
 
 //添加一个笔记li
@@ -66,7 +76,7 @@ function loadNoteDetail(){
     var noteId = $(this).data("noteId");
     //发送Ajax请求
     $.ajax({
-        url:base_url+"/note/load.do",
+        url:base_url+"/note/load.form",
         type:"post",
         data:{"id":noteId},
         dataType:"json",
@@ -202,13 +212,7 @@ function sureShareNote(){
     return false;//阻止冒泡
 };
 
-//切换列表显示
-function showNoteList(index){
-    //将所有列表隐藏
-    $(".col-xs-3:not('#save_button_div')").hide();
-    //将指定列表显示
-    $("#pc_part_"+index).show();
-};
+
 //确认搜索分享笔记
 function sureSearchShare(event){
     var code = event.keyCode;

@@ -41,6 +41,9 @@
                 //发送ajax请求加载笔记本列表
                 loadUserBooks();
                 //点击笔记本加载笔记列表(动态绑定单击事件)
+				//需要等上面一步的列表加载完毕才能绑定li，$("#book_list").click(function(){})这个函数是无法绑定到li的，因为在li没加载时候就已经执行了
+				//解决办法一：在loadUserBooks()中改成同步：async:false
+				//下面是解决办法二：  动态绑定事件处理
                 $("#book_list").on("click","li",loadBookNotes);
                 //点击笔记加载笔记信息
                 $("#note_list").on("click","li",loadNoteDetail);
