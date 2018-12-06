@@ -1,5 +1,6 @@
 //加载笔记列表
 function loadBookNotes(){
+    //alert("准备加载笔记列表");
     //切换中间列表显示
     showNoteList(2);//全部列表显示,其他列表隐藏
     //切换成编辑区
@@ -24,8 +25,9 @@ function loadBookNotes(){
                 $("#note_list").empty();//清除原有笔记列表
                 //循环笔记数组,生成笔记列表
                 for(var i=0;i<notes.length;i++){
-                    var noteTitle = notes[i].cn_note_title;
-                    var noteId = notes[i].cn_note_id;
+                    //CN_NOTE_ID必须大写
+                    var noteTitle = notes[i].CN_NOTE_TITLE;
+                    var noteId = notes[i].CN_NOTE_ID;
                     //创建一个笔记li
                     createNoteLi(noteTitle,noteId);
                 }
@@ -66,6 +68,36 @@ function createNoteLi(noteTitle,noteId){
     $("#note_list").append($li);
 };
 
+//确认创建笔记
+function sureAddNote(){
+    //获取请求参数
+    var noteTitle = $("#input_note").val().trim();
+    var $li = $("#book_list li a.checked").parent();
+    var bookId = $li.data("bookId");
+    //TODO 检查参数格式
+    //发送Ajax请求
+    $.ajax({
+        url:"/note/add.form",
+        //url:base_url+"/note/add.do",
+        type:"post",
+        data:{"bookId":bookId,"userId":userId,"noteTitle":noteTitle},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                //关闭对话框
+                closeWindow();
+                //添加一个笔记li
+                var noteId = result.data;
+                createNoteLi(noteTitle,noteId);
+                //提示成功
+                alert(result.msg);
+            }
+        },
+        error:function(){
+            alert("创建笔记失败");
+        }
+    });
+};
 
 //加载笔记详情
 function loadNoteDetail(){
@@ -92,36 +124,6 @@ function loadNoteDetail(){
         },
         error:function(){
             alert("加载笔记详情失败");
-        }
-    });
-};
-
-//确认创建笔记
-function sureAddNote(){
-    //获取请求参数
-    var noteTitle = $("#input_note").val().trim();
-    var $li = $("#book_list li a.checked").parent();
-    var bookId = $li.data("bookId");
-    //TODO 检查参数格式
-    //发送Ajax请求
-    $.ajax({
-        url:base_url+"/note/add.do",
-        type:"post",
-        data:{"bookId":bookId,"userId":userId,"noteTitle":noteTitle},
-        dataType:"json",
-        success:function(result){
-            if(result.status==0){
-                //关闭对话框
-                closeWindow();
-                //添加一个笔记li
-                var noteId = result.data;
-                createNoteLi(noteTitle,noteId);
-                //提示成功
-                alert(result.msg);
-            }
-        },
-        error:function(){
-            alert("创建笔记失败");
         }
     });
 };

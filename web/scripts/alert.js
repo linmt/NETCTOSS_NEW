@@ -13,6 +13,21 @@ function closeWindow(){
     $("#can").empty();//清空对话框内容
 };
 
+//弹出添加笔记对话框
+function showAddNoteWindow(){
+    //判断是否有选中的笔记本
+    var $bookLi = $("#book_list a.checked");
+    if($bookLi.length==0){
+        alert("请选择笔记本");
+    }else{
+        //弹出对话框
+        $(".opacity_bg").show();//显示背景
+        //var url = base_url+"/alert/alert_note.html";
+        var url = "/alert/alert_note.html";
+        $("#can").load(url);
+    }
+};
+
 //弹出转移笔记对话框
 function showMoveNoteWindow(){
     $(".opacity_bg").show();
@@ -43,19 +58,4 @@ function showRecycleNoteWindow(){
         base_url+"/alert/alert_delete_note.html";
     $("#can").load(url);
     return false;//阻止冒泡
-};
-
-//弹出添加笔记对话框
-function showAddNoteWindow(){
-    //判断是否有选中的笔记本
-    var $bookLi = $("#book_list a.checked");
-    if($bookLi.length==0){
-        alert("请选择笔记本");
-    }else{
-        //弹出对话框
-        $(".opacity_bg").show();//显示背景
-        var url =
-            base_url+"/alert/alert_note.html";
-        $("#can").load(url);
-    }
 };

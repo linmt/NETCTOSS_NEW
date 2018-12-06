@@ -1,6 +1,7 @@
 package com.lmt.dao;
 
 import com.lmt.annotation.MybatisDao;
+import com.lmt.entity.Note;
 
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,10 @@ public interface NoteDao {
     //	Map<String, Object> params);
     //public int recycle(String id);
     //public int update(Note note);
-    public void save(Note note);
+
     public Note findById(String id);
     */
     //public List<Note> findByBookId(String bookId);
     public List<Map> findByBookId(String bookId);
+    public void save(Note note);
 }

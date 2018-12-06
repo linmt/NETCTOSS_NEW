@@ -13,3 +13,5 @@ http://localhost:8080/json1.form
 http://localhost:8080/user/login.form?name=cat&password=123
 
 http://localhost:8080/log_in.html
+
+http://localhost:8080/note/loadnotes.form?bookId=0037215c-09fe-4eaa-aeb5-25a340c6b39b

@@ -41,29 +41,24 @@ public class NoteServiceImpl implements NoteService{
     public NoteResult loadBookNotes(String bookId) {
         NoteResult result = new NoteResult();
         List<Map> list = noteDao.findByBookId(bookId);
+        /*
+        for(Map m:list){
+            for (Object key : m.keySet()) {
+                System.out.println("Key = " + key);
+            }
+            for (Object value : m.values()) {
+                System.out.println("Value = " + value);
+            }
+        }
+        */
         result.setData(list);
         result.setStatus(0);
         result.setMsg("加载笔记列表成功");
         return result;
     }
-/*
-    public NoteResult loadNoteDetail(String id) {
-        NoteResult result = new NoteResult();
-        Note note = noteDao.findById(id);
-        if(note == null){
-            result.setStatus(1);
-            result.setMsg("找不到笔记信息");
-            return result;
-        }
-        result.setStatus(0);
-        result.setData(note);
-        result.setMsg("查找笔记成功");
-        return result;
-    }
-    @Transactional(isolation=Isolation.REPEATABLE_READ)
-    public NoteResult addNote(
-            String bookId, String userId,
-            String noteTitle) {
+
+    //@Transactional(isolation=Isolation.REPEATABLE_READ)
+    public NoteResult addNote(String bookId, String userId,String noteTitle) {
         Note note = new Note();
         note.setCn_notebook_id(bookId);
         note.setCn_user_id(userId);
@@ -83,6 +78,21 @@ public class NoteServiceImpl implements NoteService{
         result.setData(noteId);
         return result;
     }
+/*
+    public NoteResult loadNoteDetail(String id) {
+        NoteResult result = new NoteResult();
+        Note note = noteDao.findById(id);
+        if(note == null){
+            result.setStatus(1);
+            result.setMsg("找不到笔记信息");
+            return result;
+        }
+        result.setStatus(0);
+        result.setData(note);
+        result.setMsg("查找笔记成功");
+        return result;
+    }
+
     @Transactional
     public NoteResult updateNote(String noteTitle, String noteBody,String noteId) {
         Note note = new Note();
