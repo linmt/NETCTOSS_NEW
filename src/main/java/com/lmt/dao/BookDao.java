@@ -10,6 +10,6 @@ import com.lmt.entity.NoteBook;
 import java.util.List;
 @MybatisDao
 public interface BookDao {
-    public void save(NoteBook book);
     public List<NoteBook> findByUserId(String userId);
+    public void save(NoteBook book);
 }

@@ -5,8 +5,10 @@ function loadBookNotes(){
     //切换成编辑区
     $("#pc_part_3").show();
     $("#pc_part_5").hide();
-    //将当前笔记本li设置成选中状态
+    //清楚非当前笔记本li的选中状态
     $("#book_list li a").removeClass("checked");
+    //将当前笔记本li设置成选中状态
+    //也可以用children
     $(this).find("a").addClass("checked");
     //获取请求参数
     var bookId = $(this).data("bookId");

@@ -38,20 +38,20 @@
             $(function(){
                 //实例化Ueditor编辑器
                 um = UM.getEditor('myEditor');
-                //发送ajax请求加载笔记本列表
+                //发送ajax请求加载笔记本列表   notebook.js
                 loadUserBooks();
                 //点击笔记本加载笔记列表(动态绑定单击事件)
 				//需要等上面一步的列表加载完毕才能绑定li，$("#book_list").click(function(){})这个函数是无法绑定到li的，因为在li没加载时候就已经执行了
 				//解决办法一：在loadUserBooks()中改成同步：async:false
-				//下面是解决办法二：  动态绑定事件处理
+				//下面是解决办法二：  动态绑定事件处理   note.js
                 $("#book_list").on("click","li",loadBookNotes);
                 //点击笔记加载笔记信息
                 $("#note_list").on("click","li",loadNoteDetail);
-                //弹出"添加笔记本"对话框
+                //弹出"添加笔记本"对话框   alert.js
                 $("#add_notebook").click(showAddBookWindow);
-                //关闭对话框
+                //关闭对话框，可用于关闭所有对话框，不仅限于当前这个   alert.js
                 $("#can").on("click",".cancle,.close",closeWindow);
-                //确认创建笔记本
+                //确认创建笔记本   notebook.js
                 $("#can").on("click","#sure_addbook",sureAddBook);
                 //弹出"添加笔记"对话框
                 $("#add_note").click(showAddNoteWindow);

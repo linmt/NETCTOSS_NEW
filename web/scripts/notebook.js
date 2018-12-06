@@ -33,8 +33,10 @@ function createBookLi(bookName,bookId){
     //将bookId和li元素绑定
     var $li = $(s_li);
     $li.data("bookId",bookId);
-    //将li元素添加到ul
-    $("#book_list").append($li);
+    //将li元素添加到ul   这是加到最后
+    //$("#book_list").append($li);
+    //将li元素添加到ul   这是加到最前
+    $("#book_list").prepend($li);
 };
 
 //确认创建笔记本
@@ -44,13 +46,14 @@ function sureAddBook(){
     //TODO 检查格式
     //发送Ajax请求
     $.ajax({
-        url:base_url+"/notebook/add.do",
+        //url:base_url+"/notebook/add.do",
+        url:"/notebook/add.form",
         type:"post",
         data:{"userId":userId,"bookName":bookName},
         dataType:"json",
         success:function(result){
             if(result.status==0){
-                //关闭对话框
+                //关闭对话框  alert.js
                 closeWindow();
                 //添加一个笔记本li
                 var bookId = result.data;

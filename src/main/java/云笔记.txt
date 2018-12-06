@@ -33,3 +33,7 @@ NoteBook、NoteBookMapper、BookDao、BookService、BookServiceImpl、LoadBooksC
 Note、NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、LoadNotesController、edit.html
 重点：页面元素动态绑定
 
+添加笔记本
+edit.html、alert.js、notebook.js、alert_notebook.html
+NoteBookMapper、BookDao、BookService、BookServiceImpl、AddBookController
+
