@@ -78,7 +78,7 @@ public class NoteServiceImpl implements NoteService{
         result.setData(noteId);
         return result;
     }
-/*
+
     public NoteResult loadNoteDetail(String id) {
         NoteResult result = new NoteResult();
         Note note = noteDao.findById(id);
@@ -92,6 +92,8 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("查找笔记成功");
         return result;
     }
+/*
+
 
     @Transactional
     public NoteResult updateNote(String noteTitle, String noteBody,String noteId) {

@@ -25,7 +25,7 @@ function loadBookNotes(){
                 $("#note_list").empty();//清除原有笔记列表
                 //循环笔记数组,生成笔记列表
                 for(var i=0;i<notes.length;i++){
-                    //CN_NOTE_ID必须大写
+                    //CN_NOTE_ID必须大写，这里是查询返回map，其他地方返回的是实体类
                     var noteTitle = notes[i].CN_NOTE_TITLE;
                     var noteId = notes[i].CN_NOTE_ID;
                     //创建一个笔记li
@@ -65,7 +65,7 @@ function createNoteLi(noteTitle,noteId){
     var $li  = $(s_li);
     $li.data("noteId",noteId);
     //将li添加到ul列表区
-    $("#note_list").append($li);
+    $("#note_list").prepend($li);
 };
 
 //确认创建笔记
@@ -108,7 +108,8 @@ function loadNoteDetail(){
     var noteId = $(this).data("noteId");
     //发送Ajax请求
     $.ajax({
-        url:base_url+"/note/load.form",
+        //url:base_url+"/note/load.do",
+        url:"/note/load.form",
         type:"post",
         data:{"id":noteId},
         dataType:"json",

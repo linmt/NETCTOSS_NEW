@@ -22,9 +22,9 @@ public interface NoteDao {
     //public int recycle(String id);
     //public int update(Note note);
 
-    public Note findById(String id);
     */
     //public List<Note> findByBookId(String bookId);
     public List<Map> findByBookId(String bookId);
     public void save(Note note);
+    public Note findById(String id);
 }

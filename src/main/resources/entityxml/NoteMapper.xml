@@ -27,6 +27,10 @@
         #{cn_note_last_modify_time}
         )
     </insert>
+
+    <select id="findById" parameterType="string" resultType="com.lmt.entity.Note">
+        select * from cn_note where cn_note_id=#{id}
+    </select>
 <!--
     <delete id="batchDelete">
         delete from cn_note where cn_note_id in
@@ -94,13 +98,5 @@
         cn_note_last_modify_time=#{cn_note_last_modify_time}
         where cn_note_id=#{cn_note_id}
     </update>
-
-
-
-    <select id="findById" parameterType="string" resultType="com.lmt.entity.Note">
-        select * from cn_note where cn_note_id=#{id}
-    </select>
-
-
     -->
 </mapper>

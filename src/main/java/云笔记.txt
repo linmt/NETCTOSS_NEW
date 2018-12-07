@@ -8,7 +8,7 @@ User、UserDao、TestUserDao、UserMapper.xml
 
 181129
 登录功能
-之前创建了：User、UserDao、UserMapper、TestUserDao
+之前创建了：User、UserMapper、UserDao、TestUserDao
 新创建：log_in.html、NoteResult<T>、UserService、UserServiceImpl、TestUserService、UserLoginController
 注：相关js源代码是保存在login.js中
 重点掌握：统一的返回对象NoteResult
@@ -23,14 +23,18 @@ log_in.html、UserLoginController
 log_in.html中关于发送登陆请求，接收用户id，保存登陆cookie的功能可以封装在login.js
 
 注册
-UserMapper、UserDao、UserService、UserServiceImpl、NoteUtil、TestUserDao、UserRegistController、log_in.html
+UserMapper、UserDao、UserService、UserServiceImpl、NoteUtil、UserRegistController
+log_in.html
+TestUserDao
 注：相关js源代码是保存在regist.js中
 
 笔记本列表
-NoteBook、NoteBookMapper、BookDao、BookService、BookServiceImpl、LoadBooksController、notebook.js、edit.html
+NoteBook、NoteBookMapper、BookDao、BookService、BookServiceImpl、LoadBooksController
+edit.html、notebook.js
 
 笔记列表显示
-Note、NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、LoadNotesController、edit.html
+Note、NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、LoadNotesController
+edit.html、note.js
 重点：页面元素动态绑定
 
 添加笔记本
@@ -38,5 +42,13 @@ edit.html、alert.js、notebook.js、alert_notebook.html
 NoteBookMapper、BookDao、BookService、BookServiceImpl、AddBookController
 
 添加笔记
+NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、AddNoteController
+edit.html、alert.js、note.js、alert_note.html
+
+显示笔记详情
+NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、LoadNoteDetailController
+edit.html、note.js
+TestLoadNoteDetail
+重点：Ueditor编辑器
 
 

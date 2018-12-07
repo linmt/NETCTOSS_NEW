@@ -19,13 +19,18 @@
 	<link href="styles/umeditor.min.css" type="text/css" rel="stylesheet">
 
 	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+
 	<script type="text/javascript" src="scripts/cookie_util.js"></script>
 
 	<script type="text/javascript" src="scripts/notebook.js"></script>
-
-	<script type="text/javascript" src="scripts/base.js"></script>
 	<script type="text/javascript" src="scripts/note.js"></script>
 	<script type="text/javascript" src="scripts/alert.js"></script>
+
+	<script type="text/javascript" src="scripts/ue/umeditor.config.js"></script>
+	<script type="text/javascript" src="scripts/ue/umeditor.min.js"></script>
+	<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
+
+	<script type="text/javascript" src="scripts/base.js"></script>
 	<script type="text/javascript" src="scripts/recycle.js"></script>
 	<script type="text/javascript">
         //从Cookie获取用户ID
@@ -36,9 +41,6 @@
         }else{
             //其他操作
             $(function(){
-                //实例化Ueditor编辑器
-                um = UM.getEditor('myEditor');
-
                 //发送ajax请求加载笔记本列表   notebook.js
                 loadUserBooks();
 
@@ -47,9 +49,6 @@
 				//解决办法一：在loadUserBooks()中改成同步：async:false
 				//下面是解决办法二：  动态绑定事件处理   note.js
                 $("#book_list").on("click","li",loadBookNotes);
-
-                //点击笔记加载笔记信息
-                $("#note_list").on("click","li",loadNoteDetail);
 
                 //弹出"添加笔记本"对话框   alert.js
                 $("#add_notebook").click(showAddBookWindow);
@@ -63,8 +62,18 @@
                 //确认创建笔记   note.js
                 $("#can").on("click","#sure_addnote",sureAddNote);
 
+                //实例化Ueditor编辑器
+                um = UM.getEditor('myEditor');
+                //可以在文本框中预先设置内容
+				//um.setContent("这是标题");
+                //um.setContent("<h1>这是带格式的标题</h1>");
+
+                //点击笔记加载笔记信息
+                $("#note_list").on("click","li",loadNoteDetail);
+
                 //保存笔记
                 $("#save_note").click(sureUpdateNote);
+
                 //显示笔记菜单
                 showNoteMenu();
                 //弹出放入回收站对话框
