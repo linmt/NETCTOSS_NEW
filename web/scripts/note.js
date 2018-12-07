@@ -65,7 +65,7 @@ function createNoteLi(noteTitle,noteId){
     var $li  = $(s_li);
     $li.data("noteId",noteId);
     //将li添加到ul列表区
-    $("#note_list").append($li);
+    $("#note_list").prepend($li);
 };
 
 //确认创建笔记
