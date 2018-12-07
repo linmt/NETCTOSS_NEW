@@ -137,20 +137,24 @@ function sureUpdateNote(){
     }else{
         //获取请求参数
         var noteId = $li.data("noteId");
-        var noteTitle =
-            $("#input_note_title").val().trim();
+        var noteTitle = $("#input_note_title").val().trim();
         var noteBody = um.getContent();
         //TODO 检测格式
         //发送Ajax请求
         $.ajax({
-            url:base_url+"/note/update.do",
+            //url:base_url+"/note/update.do",
+            url:"/note/update.form",
             type:"post",
             data:{"noteTitle":noteTitle,"noteBody":noteBody,"noteId":noteId},
             dataType:"json",
             success:function(result){
                 if(result.status==0){
                     //更新笔记li的名称
-                    var str = '<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'+noteTitle+'<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-chevron-down"></i></button>';
+                    var str = '<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'
+                               +noteTitle
+                             +'<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down">'
+                             +'  <i class="fa fa-chevron-down"></i>'
+                             +'</button>';
                     $li.find("a").html(str);
                     //提示成功
                     alert(result.msg);

@@ -51,4 +51,8 @@ edit.html、note.js
 TestLoadNoteDetail
 重点：Ueditor编辑器
 
+更改并保存笔记
+NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、UpdateNoteController
+edit.html、note.js
+
 

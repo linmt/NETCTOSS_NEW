@@ -13,8 +13,7 @@ import java.util.Map;
 public interface NoteDao {
     /*
     public int batchDelete(String[] ids);
-    //动态更新
-    public int dynamicUpdate(Note note);
+
     //组合查询
     public List<Note> findNotes(NoteBean note);
     //public int updateBookId(
@@ -27,4 +26,6 @@ public interface NoteDao {
     public List<Map> findByBookId(String bookId);
     public void save(Note note);
     public Note findById(String id);
+    //动态更新
+    public int dynamicUpdate(Note note);
 }

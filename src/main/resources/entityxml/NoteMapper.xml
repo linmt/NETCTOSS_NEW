@@ -31,13 +31,6 @@
     <select id="findById" parameterType="string" resultType="com.lmt.entity.Note">
         select * from cn_note where cn_note_id=#{id}
     </select>
-<!--
-    <delete id="batchDelete">
-        delete from cn_note where cn_note_id in
-        <foreach collection="array" item="id" open="(" close=")" separator=",">
-            #{id}
-        </foreach>
-    </delete>
 
     <update id="dynamicUpdate" parameterType="com.lmt.entity.Note">
         update cn_note
@@ -60,6 +53,15 @@
         </set>
         where cn_note_id=#{cn_note_id}
     </update>
+<!--
+    <delete id="batchDelete">
+        delete from cn_note where cn_note_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+
 
     <select id="findNotes" parameterType="com.lmt.entity.NoteBean" resultType="com.lmt.entity.Note">
         select * from cn_note

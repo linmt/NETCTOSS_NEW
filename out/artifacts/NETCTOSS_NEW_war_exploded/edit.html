@@ -26,8 +26,9 @@
 	<script type="text/javascript" src="scripts/note.js"></script>
 	<script type="text/javascript" src="scripts/alert.js"></script>
 
-	<script type="text/javascript" src="scripts/ue/umeditor.config.js"></script>
-	<script type="text/javascript" src="scripts/ue/umeditor.min.js"></script>
+	<!-- Ueditor编辑器JS -->
+	<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.min.js"></script>
 	<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
 
 	<script type="text/javascript" src="scripts/base.js"></script>
@@ -63,6 +64,11 @@
                 $("#can").on("click","#sure_addnote",sureAddNote);
 
                 //实例化Ueditor编辑器
+				/*
+				为何um在外面定义，在这里初始化？
+				如果um在这里定义并初始化，则对于$("#cc").click(function(){})中的function可以引用该um，因为此处的function是$(function(){}的内部函数
+				但是如果将function封装在外部js（命名为fun_A），在此处引用时，um不能传入fun_A，因为fun_A是全局函数，而变量um是$(function(){}的内部变量
+				*/
                 um = UM.getEditor('myEditor');
                 //可以在文本框中预先设置内容
 				//um.setContent("这是标题");
@@ -376,10 +382,6 @@
 <script src="scripts/theme-setup.js"></script>
 <!-- Google-Code代码高亮JS -->
 <script class="re-execute" src="scripts/run_prettify.js"></script>
-<!-- Ueditor编辑器JS -->
-<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.min.js"></script>
-<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
 
 <script type="text/javascript">
     //重写JS原生alert函数

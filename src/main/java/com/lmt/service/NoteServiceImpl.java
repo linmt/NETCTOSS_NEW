@@ -92,10 +92,8 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("查找笔记成功");
         return result;
     }
-/*
 
-
-    @Transactional
+    //@Transactional
     public NoteResult updateNote(String noteTitle, String noteBody,String noteId) {
         Note note = new Note();
         note.setCn_note_id(noteId);
@@ -109,7 +107,7 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("保存笔记成功");
         return result;
     }
-
+/*
     @Transactional
     public NoteResult shareNote(String noteId) {
         NoteResult result = new NoteResult();
