@@ -1,79 +1,79 @@
 <html>
-  <head>
-    <title>±Ê¼Ç¹ÜÀí</title>
-<script type="text/javascript"
-	src="scripts/jquery.min.js">
-</script>
-<script type="text/javascript">
-$(function(){
-	$("#search_btn").click(function(){
-		//»ñÈ¡ÇëÇó²ÎÊı
-		var title = $("#title").val().trim();
-		var status = $("#status").val();
-		var begin = $("#begin").val().trim();
-		var end = $("#end").val().trim();
-		//TODO ¼ì²é¸ñÊ½
-		//·¢ËÍAjaxÇëÇó
-		$.ajax({
-			url:"http://localhost:8080/CloudNote/note/searchNotes.do",
-			type:"post",
-			data:{"title":title,"status":status,
-				"beginTime":begin,"endTime":end},
-			dataType:"json",
-			success:function(result){
-				if(result.status==0){
-					var notes = result.data;
-					//½«ÁĞ±íÖĞµÄtrÉ¾³ı,±£ÁôµÚÒ»ĞĞ±êÌâ
-					$("#note_tb tr:gt(0)").remove();
-					//Ñ­»·Éú³ÉÁĞ±í
-					for(var i=0;i<notes.length;i++){
-						var noteTitle = notes[i].cn_note_title;
-						var noteStatus = notes[i].cn_note_status_id;
-						var creatime = notes[i].createTime;
-						if(noteStatus=='1'){
-							noteStatus='normal';
-						}else if(noteStatus=='2'){
-							noteStatus='recycle';
-						}
-						//Æ´Ò»¸ötr
-						var str = "<tr><td><input type='checkbox'/>"
-							+noteTitle+"</td><td>"
-							+noteStatus+"</td><td>"
-							+creatime+"</td></tr>";
-						//Ìí¼Óµ½tableÔªËØÖĞ
-						$("#note_tb").append(str);
-					}
-				}
-			},
-			error:function(){
-				alert("ËÑË÷±Ê¼ÇÊ§°Ü");
-			}
-		});
-	});
-});
-</script>
-  </head>
- 
-  <body>
-  	<form action="">
-  	±êÌâ:<input type="text" id="title">
-  	×´Ì¬:<select id="status">
-  		    <option value="-1">all</option>
-  		    <option value="1">normal</option>
-  		    <option value="2">recycle</option>
-  		  </select>
-  		  <br/>
-  	ÆğÊ¼ÈÕÆÚ:<input type="text" id="begin">
-  	½áÊøÈÕÆÚ:<input type="text" id="end">
-  	<input type="button" value="¼ìË÷" id="search_btn">
-  	</form>
-    <hr/>
-   <table id="note_tb">
-   	<tr>
-	   	<td>±êÌâ</td>
-	   	<td>×´Ì¬</td>
-	   	<td>´´½¨ÈÕÆÚ</td>
-   	</tr>
-   </table>
-  </body>
+<head>
+	<title>ç¬”è®°ç®¡ç†</title>
+	<script type="text/javascript"
+			src="scripts/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+        $(function(){
+            $("#search_btn").click(function(){
+                //è·å–è¯·æ±‚å‚æ•°
+                var title = $("#title").val().trim();
+                var status = $("#status").val();
+                var begin = $("#begin").val().trim();
+                var end = $("#end").val().trim();
+                //TODO æ£€æŸ¥æ ¼å¼
+                //å‘é€Ajaxè¯·æ±‚
+                $.ajax({
+                    url:"http://localhost:8080/CloudNote/note/searchNotes.do",
+                    type:"post",
+                    data:{"title":title,"status":status,
+                        "beginTime":begin,"endTime":end},
+                    dataType:"json",
+                    success:function(result){
+                        if(result.status==0){
+                            var notes = result.data;
+                            //å°†åˆ—è¡¨ä¸­çš„tråˆ é™¤,ä¿ç•™ç¬¬ä¸€è¡Œæ ‡é¢˜
+                            $("#note_tb tr:gt(0)").remove();
+                            //å¾ªç¯ç”Ÿæˆåˆ—è¡¨
+                            for(var i=0;i<notes.length;i++){
+                                var noteTitle = notes[i].cn_note_title;
+                                var noteStatus = notes[i].cn_note_status_id;
+                                var creatime = notes[i].createTime;
+                                if(noteStatus=='1'){
+                                    noteStatus='normal';
+                                }else if(noteStatus=='2'){
+                                    noteStatus='recycle';
+                                }
+                                //æ‹¼ä¸€ä¸ªtr
+                                var str = "<tr><td><input type='checkbox'/>"
+                                    +noteTitle+"</td><td>"
+                                    +noteStatus+"</td><td>"
+                                    +creatime+"</td></tr>";
+                                //æ·»åŠ åˆ°tableå…ƒç´ ä¸­
+                                $("#note_tb").append(str);
+                            }
+                        }
+                    },
+                    error:function(){
+                        alert("æœç´¢ç¬”è®°å¤±è´¥");
+                    }
+                });
+            });
+        });
+	</script>
+</head>
+
+<body>
+<form action="">
+	æ ‡é¢˜:<input type="text" id="title">
+	çŠ¶æ€:<select id="status">
+	<option value="-1">all</option>
+	<option value="1">normal</option>
+	<option value="2">recycle</option>
+</select>
+	<br/>
+	èµ·å§‹æ—¥æœŸ:<input type="text" id="begin">
+	ç»“æŸæ—¥æœŸ:<input type="text" id="end">
+	<input type="button" value="æ£€ç´¢" id="search_btn">
+</form>
+<hr/>
+<table id="note_tb">
+	<tr>
+		<td>æ ‡é¢˜</td>
+		<td>çŠ¶æ€</td>
+		<td>åˆ›å»ºæ—¥æœŸ</td>
+	</tr>
+</table>
+</body>
 </html>

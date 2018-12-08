@@ -74,25 +74,32 @@
 				//um.setContent("这是标题");
                 //um.setContent("<h1>这是带格式的标题</h1>");
 
-                //点击笔记加载笔记信息
+				um.ready(function () {
+					um.setDisabled();
+                });
+
+                //点击笔记加载笔记信息   note.js
                 $("#note_list").on("click","li",loadNoteDetail);
 
-                //保存笔记
+                //保存笔记   note.js
                 $("#save_note").click(sureUpdateNote);
 
-                //显示笔记菜单
+                //显示笔记菜单   note.js
                 showNoteMenu();
-                //弹出放入回收站对话框
+
+                //弹出放入回收站对话框   alert.js
                 $("#note_list").on("click",".btn_delete",showRecycleNoteWindow);
-                //确认放入回收站操作
+                //确认放入回收站操作   recycle.js
                 $("#can").on("click","#sure_recyclenote",sureRecycleNote);
-                //分享笔记
+
+                //分享笔记   note.js
                 $("#note_list").on("click",".btn_share",sureShareNote);
-                //搜索分享笔记
+
+                //搜索分享笔记   note.js
                 $("#search_note").keydown(sureSearchShare);
-                //搜索出来的分享笔记预览
+                //搜索出来的分享笔记预览   note.js
                 $("#search_list").on("click","li",viewShareNote);
-                //弹出转移笔记对话框
+                //弹出转移笔记对话框   alert.js
                 $("#note_list").on("click",".btn_move",showMoveNoteWindow);
                 //确定转移笔记操作
                 $("#can").on("click","#sure_movenote",function(){
@@ -215,7 +222,18 @@
 				<div class="chat-contact">
 					<div class="contact-body">
 						<ul class="contacts-list">
-							<li class="disable"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> 虚假回收站笔记<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button><button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay"><i class="fa fa-reply"></i></button></a></li>
+							<li class="disable">
+								<a >
+									<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>
+									虚假回收站笔记
+									<button type="button" class="btn btn-default btn-xs btn_position btn_delete">
+										<i class="fa fa-times"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay">
+										<i class="fa fa-reply"></i>
+									</button>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

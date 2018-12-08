@@ -5,8 +5,10 @@ package com.lmt.service;
  */
 
 import com.lmt.dao.NoteDao;
+import com.lmt.dao.ShareDao;
 import com.lmt.entity.Note;
 import com.lmt.entity.NoteResult;
+import com.lmt.entity.Share;
 import com.lmt.util.NoteUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -26,8 +28,8 @@ import java.util.Map;
 public class NoteServiceImpl implements NoteService{
     @Resource
     private NoteDao noteDao;
-//    @Resource
-//    private ShareDao shareDao;
+    @Resource
+    private ShareDao shareDao;
 /*
     public NoteResult loadBookNotes(String bookId) {
         NoteResult result = new NoteResult();
@@ -107,7 +109,7 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("保存笔记成功");
         return result;
     }
-/*
+
     @Transactional
     public NoteResult shareNote(String noteId) {
         NoteResult result = new NoteResult();
@@ -136,6 +138,8 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("分享笔记成功");
         return result;
     }
+/*
+
 
     public NoteResult searchShare(String keyword) {
         String title = "";

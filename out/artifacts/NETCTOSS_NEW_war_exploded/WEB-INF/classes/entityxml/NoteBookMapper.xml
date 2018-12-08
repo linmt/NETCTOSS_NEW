@@ -4,7 +4,7 @@
 
     <select id="findByUserId" parameterType="string" resultType="com.lmt.entity.NoteBook">
         select * from cn_notebook where cn_user_id=#{userId}
-        order by cn_notebook_createtime desc
+        order by cn_notebook_createtime
     </select>
 
     <insert id="save" parameterType="com.lmt.entity.NoteBook">

@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/entityxml/Cost.xml" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/resources/entityxml/NoteBookMapper.xml" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/resources/entityxml/NoteMapper.xml" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/entityxml/ShareMapper.xml" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/resources/entityxml/UserMapper.xml" dialect="Oracle" />
   </component>
 </project>

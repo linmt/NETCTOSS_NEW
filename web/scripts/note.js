@@ -41,6 +41,9 @@ function loadBookNotes(){
 
 //切换列表显示
 function showNoteList(index){
+    um.setContent("");
+    $("#input_note_title").val("");//清空标题
+    um.setDisabled();
     //将所有列表隐藏
     $(".col-xs-3:not('#save_button_div')").hide();
     //将指定列表显示
@@ -101,6 +104,7 @@ function sureAddNote(){
 
 //加载笔记详情
 function loadNoteDetail(){
+    um.setContent("");
     //将笔记设置成选中状态
     $("#note_list li a").removeClass("checked");
     $(this).find("a").addClass("checked");
@@ -120,7 +124,11 @@ function loadNoteDetail(){
                 //设置标题
                 $("#input_note_title").val(noteTitle);
                 //设置内容
-                um.setContent(noteBody);
+                if(noteBody!=null){
+                    um.setContent(noteBody);
+                }else {
+                    um.setContent("（请输入文本）");
+                }
             }
         },
         error:function(){
@@ -129,6 +137,7 @@ function loadNoteDetail(){
     });
 };
 
+//修改笔记
 function sureUpdateNote(){
     //检查是否选中笔记
     var $li = $("#note_list li a.checked").parent();
@@ -175,7 +184,7 @@ function showNoteMenu(){
         //将当前点击按钮的菜单显示
         var $li = $(this).parents("li");
         var $menu = $li.find(".note_menu");
-        $menu.slideDown(1000);
+        $menu.slideDown(200);
         //将当前笔记li选中
         $("#note_list li a.checked").removeClass("checked");
         $li.find("a").addClass("checked");
@@ -197,28 +206,27 @@ function showNoteMenu(){
 //确认分享笔记操作
 function sureShareNote(){
     //获取请求参数
+    //也可以
+    // var $li = $(this).parent("li");
     var $li = $("#note_list a.checked").parent();
     var noteId = $li.data("noteId");
     //发送Ajax请求
     $.ajax({
-        url:base_url+"/note/share.do",
+        //url:base_url+"/note/share.do",
+        url:"/note/share.form",
         type:"post",
         data:{"noteId":noteId},
         dataType:"json",
         success:function(result){
-            //if(result.status==0){
-            //	alert(result.msg);
-            //}else if(result.status==1){
             alert(result.msg);
-            //}
         },
         error:function(){
             alert("分享笔记失败");
         }
     });
+    //是否需要？
     return false;//阻止冒泡
 };
-
 
 //确认搜索分享笔记
 function sureSearchShare(event){

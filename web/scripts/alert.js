@@ -28,6 +28,16 @@ function showAddNoteWindow(){
     }
 };
 
+//弹出确认删除笔记对话框
+function showRecycleNoteWindow(){
+    //弹出对话框
+    $(".opacity_bg").show();//显示背景
+    //var url = base_url+"/alert/alert_delete_note.html";
+    var url ="/alert/alert_delete_note.html";
+    $("#can").load(url);
+    return false;//阻止冒泡
+};
+
 //弹出转移笔记对话框
 function showMoveNoteWindow(){
     $(".opacity_bg").show();
@@ -49,13 +59,3 @@ function showMoveNoteWindow(){
     });
     return false;//阻止li单击
 }
-
-//弹出确认删除笔记对话框
-function showRecycleNoteWindow(){
-    //弹出对话框
-    $(".opacity_bg").show();//显示背景
-    var url =
-        base_url+"/alert/alert_delete_note.html";
-    $("#can").load(url);
-    return false;//阻止冒泡
-};

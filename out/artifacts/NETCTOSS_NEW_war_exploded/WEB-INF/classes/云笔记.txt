@@ -55,12 +55,9 @@ TestLoadNoteDetail
 NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、UpdateNoteController
 edit.html、note.js
 
-笔记下拉菜单
-edit.html、note.js
-
 笔记删除
-NoteMapper.xml（改成只显示没有在回收站的笔记）、RecycleService、RecycleServiceImpl、RecycleNoteController
-edit.html、recycle.js、alert.js
+NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、
+edit.html、note.js
 
 笔记分享
 Share、ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、ShareNoteController

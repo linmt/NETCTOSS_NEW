@@ -13,7 +13,8 @@
     <select id="findByBookId" parameterType="string" resultType="map">
         select cn_note_id,cn_note_title from cn_note
         where cn_notebook_id=#{bookId}
-        order by cn_note_create_time desc
+        and cn_note_status_id='1'
+        order by cn_note_create_time
     </select>
 
     <insert id="save" parameterType="com.lmt.entity.Note">
