@@ -63,10 +63,14 @@ NoteMapper.xml（改成只显示没有在回收站的笔记）、RecycleService�
 edit.html、recycle.js、alert.js
 
 笔记分享
-Share、ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、ShareNoteController
+ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、ShareNoteController
 edit.html、note.js
 
 分享笔记搜索
-Share、ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、SearchShareController
+ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、SearchShareController
 edit.html、note.js
 重点：回车事件
+
+分享笔记浏览
+ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、LoadShareController
+edit.html、note.js

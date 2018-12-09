@@ -105,6 +105,7 @@ function sureAddNote(){
 //加载笔记详情
 function loadNoteDetail(){
     um.setContent("");
+    um.enable();
     //将笔记设置成选中状态
     $("#note_list li a").removeClass("checked");
     $(this).find("a").addClass("checked");
@@ -258,11 +259,12 @@ function sureSearchShare(event){
                         var shareId = notes[i].CN_SHARE_ID;
                         //拼一个li
                         var s_li ='<li class="online">';
-                        s_li +='	<a>';
-                        s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
-                        s_li += title;
-                        s_li +='	</a>';
-                        s_li +='</li>';
+                            s_li +='	<a>';
+                            s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
+                            s_li += title;
+                            s_li += '      <button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-star"></i></button>';
+                            s_li +='	</a>';
+                            s_li +='</li>';
                         //绑定shareId
                         var $li = $(s_li);
                         $li.data("shareId",shareId);
@@ -284,7 +286,8 @@ function viewShareNote(){
     var shareId = $(this).data("shareId");
     //发送Ajax请求
     $.ajax({
-        url:base_url+"/note/loadShare.do",
+        //url:base_url+"/note/loadShare.do",
+        url:"/note/loadShare.form",
         type:"post",
         data:{"shareId":shareId},
         dataType:"json",

@@ -155,7 +155,6 @@ public class NoteServiceImpl implements NoteService{
         result.setData(list);
         return result;
     }
-/*
 
     public NoteResult loadShare(String shareId) {
         NoteResult result = new NoteResult();
@@ -166,6 +165,8 @@ public class NoteServiceImpl implements NoteService{
         return result;
     }
 
+
+/*
     public NoteResult moveNote(
             String noteId, String bookId) {
 //		Map<String,Object> params = new HashMap<String, Object>();
