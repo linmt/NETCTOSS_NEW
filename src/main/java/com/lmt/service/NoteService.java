@@ -13,6 +13,7 @@ public interface NoteService {
     public NoteResult shareNote(String noteId);
     public NoteResult searchShare(String keyword);
     public NoteResult loadShare(String shareId);
+    public NoteResult loadDeleteNote(String userId);
     /*
     public NoteResult searchNotes(SearchNoteParams params);
     public NoteResult moveNote(String noteId,String bookId);

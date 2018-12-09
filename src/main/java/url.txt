@@ -19,3 +19,5 @@ http://localhost:8080/note/loadnotes.form?bookId=0037215c-09fe-4eaa-aeb5-25a340c
 http://localhost:8080/note/search.form?keyword=新建
 
 http://localhost:8080/note/loadShare.form?shareId=aef5e2a5-bc1a-456c-8428-2b87a7b25cc9
+
+http://localhost:8080/note/loadDelete.form?userId=52f9b276-38ee-447f-a3aa-0d54e7a736e4

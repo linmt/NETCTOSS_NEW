@@ -28,4 +28,5 @@ public interface NoteDao {
     public Note findById(String id);
     //动态更新
     public int dynamicUpdate(Note note);
+    public List<Map> findDeleteNote(String userId);
 }

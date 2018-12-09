@@ -54,6 +54,10 @@
         </set>
         where cn_note_id=#{cn_note_id}
     </update>
+
+    <select id="findDeleteNote" parameterType="string" resultType="map">
+        select cn_note_id,cn_note_title from cn_note where cn_user_id=#{userId} and cn_note_status_id='2'
+    </select>
 <!--
     <delete id="batchDelete">
         delete from cn_note where cn_note_id in

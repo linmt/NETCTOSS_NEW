@@ -165,6 +165,14 @@ public class NoteServiceImpl implements NoteService{
         return result;
     }
 
+    public NoteResult loadDeleteNote(String userId){
+        List<Map> list = noteDao.findDeleteNote(userId);
+        NoteResult result = new NoteResult();
+        result.setStatus(0);
+        result.setMsg("查找回收站笔记成功");
+        result.setData(list);
+        return result;
+    }
 
 /*
     public NoteResult moveNote(
