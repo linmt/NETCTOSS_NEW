@@ -20,19 +20,29 @@
 
 	<script type="text/javascript" src="scripts/jquery.min.js"></script>
 
-	<script type="text/javascript" src="scripts/cookie_util.js"></script>
-
-	<script type="text/javascript" src="scripts/notebook.js"></script>
-	<script type="text/javascript" src="scripts/note.js"></script>
-	<script type="text/javascript" src="scripts/alert.js"></script>
-
 	<!-- Ueditor编辑器JS -->
 	<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="scripts/ue/umeditor.min.js"></script>
 	<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
 
+	<!-- 这句这里不需要 -->
 	<script type="text/javascript" src="scripts/base.js"></script>
 	<script type="text/javascript" src="scripts/recycle.js"></script>
+	<script type="text/javascript" src="scripts/cookie_util.js"></script>
+	<script type="text/javascript" src="scripts/notebook.js"></script>
+	<script type="text/javascript" src="scripts/note.js"></script>
+	<script type="text/javascript" src="scripts/alert.js"></script>
+
+	<script type="text/javascript">
+        //重写JS原生alert函数
+        window.alert=function(e){
+            $('#can').load('./alert/alert_error.html',function(){
+                $('#error_info').text(' '+e);
+                $('.opacity_bg').show();
+            });
+        }
+	</script>
+
 	<script type="text/javascript">
         //从Cookie获取用户ID
         var userId = getCookie("userId");
@@ -97,36 +107,14 @@
 
                 //搜索分享笔记   note.js
                 $("#search_note").keydown(sureSearchShare);
+
                 //搜索出来的分享笔记预览   note.js
                 $("#search_list").on("click","li",viewShareNote);
+
                 //弹出转移笔记对话框   alert.js
                 $("#note_list").on("click",".btn_move",showMoveNoteWindow);
                 //确定转移笔记操作
-                $("#can").on("click","#sure_movenote",function(){
-                    //获取请求参数
-                    var $noteLi = $("#note_list a.checked").parent();
-                    var noteId = $noteLi.data("noteId");
-                    var bookId = $("#moveSelect").val();
-                    //TODO 检查是否选择笔记本
-                    //TODO 检查是否和原笔记本一样
-                    //发送Ajax请求
-                    $.ajax({
-                        url:base_url+"/note/move.do",
-                        type:"post",
-                        data:{"noteId":noteId,"bookId":bookId},
-                        dataType:"json",
-                        success:function(result){
-                            if(result.status==0){
-                                closeWindow();//关闭对话框
-                                $noteLi.remove();//移除笔记
-                                alert(result.msg);//提示成功
-                            }
-                        },
-                        error:function(){
-                            alert("转移笔记失败");
-                        }
-                    });
-                });
+                $("#can").on("click","#sure_movenote",sureMoveNote);
             });
         }
 	</script>
@@ -392,7 +380,6 @@
         $('#myEditor').width(width-20);
     };
 </script>
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
 
 <!-- Bootstrap框架JS -->
 <script src="scripts/bootstrap.min.js"></script>
@@ -401,14 +388,5 @@
 <!-- Google-Code代码高亮JS -->
 <script class="re-execute" src="scripts/run_prettify.js"></script>
 
-<script type="text/javascript">
-    //重写JS原生alert函数
-    window.alert=function(e){
-        $('#can').load('./alert/alert_error.html',function(){
-            $('#error_info').text(' '+e);
-            $('.opacity_bg').show();
-        });
-    }
-</script>
 </body>
 </html>

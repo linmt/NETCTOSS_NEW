@@ -65,3 +65,8 @@ edit.html、recycle.js、alert.js
 笔记分享
 Share、ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、ShareNoteController
 edit.html、note.js
+
+分享笔记搜索
+Share、ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、SearchShareController
+edit.html、note.js
+重点：回车事件

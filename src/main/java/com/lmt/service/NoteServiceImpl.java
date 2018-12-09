@@ -138,23 +138,24 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("分享笔记成功");
         return result;
     }
-/*
-
 
     public NoteResult searchShare(String keyword) {
         String title = "";
         if(!"".equals(keyword) && keyword !=null){
             title = "%"+keyword+"%";
         }else{
+            //搜索不为空的数据
             title = "%";
         }
-        List<Share> list = shareDao.findLikeTitle(title);
+        //List<Share> list = shareDao.findLikeTitle(title);
+        List<Map> list = shareDao.findLikeTitle(title);
         NoteResult result = new NoteResult();
         result.setStatus(0);
         result.setMsg("检索成功");
         result.setData(list);
         return result;
     }
+/*
 
     public NoteResult loadShare(String shareId) {
         NoteResult result = new NoteResult();

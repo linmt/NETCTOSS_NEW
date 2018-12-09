@@ -236,7 +236,8 @@ function sureSearchShare(event){
         var keyword = $("#search_note").val().trim();
         //发送Ajax请求
         $.ajax({
-            url:base_url+"/note/search.do",
+            //url:base_url+"/note/search.do",
+            url:"/note/search.form",
             type:"post",
             data:{"keyword":keyword},
             dataType:"json",
@@ -252,8 +253,9 @@ function sureSearchShare(event){
                     //循环生成笔记列表
                     var notes = result.data;
                     for(var i=0;i<notes.length;i++){
-                        var title = notes[i].cn_share_title;
-                        var shareId = notes[i].cn_share_id;
+                        //结果返回的是map，所以这里要大写
+                        var title = notes[i].CN_SHARE_TITLE;
+                        var shareId = notes[i].CN_SHARE_ID;
                         //拼一个li
                         var s_li ='<li class="online">';
                         s_li +='	<a>';
@@ -296,6 +298,33 @@ function viewShareNote(){
         },
         error:function(){
             alert("加载笔记信息失败");
+        }
+    });
+};
+
+//确定转移笔记
+function sureMoveNote(){
+    //获取请求参数
+    var $noteLi = $("#note_list a.checked").parent();
+    var noteId = $noteLi.data("noteId");
+    var bookId = $("#moveSelect").val();
+    //TODO 检查是否选择笔记本
+    //TODO 检查是否和原笔记本一样
+    //发送Ajax请求
+    $.ajax({
+        url:base_url+"/note/move.do",
+        type:"post",
+        data:{"noteId":noteId,"bookId":bookId},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                closeWindow();//关闭对话框
+                $noteLi.remove();//移除笔记
+                alert(result.msg);//提示成功
+            }
+        },
+        error:function(){
+            alert("转移笔记失败");
         }
     });
 };
