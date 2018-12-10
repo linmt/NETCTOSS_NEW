@@ -38,6 +38,17 @@ function showRecycleNoteWindow(){
     return false;//阻止冒泡
 };
 
+//单击恢复区笔记，变成被选中状态
+
+//弹出恢复对话框
+function showReplayNoteWindow(){
+    alert("弹出恢复对话框");
+    //弹出对话框
+    $(".opacity_bg").show();//显示背景
+    var url = "/alert/alert_replay.html";
+    $("#can").load(url);
+};
+
 //弹出转移笔记对话框
 function showMoveNoteWindow(){
     $(".opacity_bg").show();

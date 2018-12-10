@@ -305,6 +305,55 @@ function viewShareNote(){
     });
 };
 
+//点击回收站按钮，显示回收站笔记
+function showRecycleNotes() {
+
+    //显示回收站列表区
+    showNoteList(4);
+    //切换成预览状态
+    $("#pc_part_5").show();
+    $("#pc_part_3").hide();
+
+    //发送ajax请求
+    $.ajax({
+        url:"/note/loadDelete.form",
+        type:"post",
+        data:{"userId":userId},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                var notes=result.data;
+                $("#recycle_list").empty();//清除原有笔记列表
+                for(var i=0;i<notes.length;i++){
+                    var title = notes[i].CN_NOTE_TITLE;
+                    var noteId = notes[i].CN_NOTE_ID;
+                    //拼一个li
+                    var s_li ='<li >';
+                    s_li +='	<a >';
+                    s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
+                    s_li +=			title;
+                    s_li +='		<button type="button" class="btn btn-default btn-xs btn_position btn_delete">';
+                    s_li +='			<i class="fa fa-times"></i>';
+                    s_li +='		</button>';
+                    s_li +='		<button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay">';
+                    s_li +='			<i class="fa fa-reply"></i>';
+                    s_li +='		</button>';
+                    s_li +='	</a>';
+                    s_li +='</li>';
+                    //将noteId绑定到li上
+                    var $li  = $(s_li);
+                    $li.data("noteId",noteId);
+                    //将li添加到ul列表区
+                    $("#recycle_list").append($li);
+                }
+            }
+        },
+        error:function(){
+            alert("加载笔记信息失败");
+        }
+    });
+};
+
 //确定转移笔记
 function sureMoveNote(){
     //获取请求参数
