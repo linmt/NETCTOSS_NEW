@@ -307,7 +307,6 @@ function viewShareNote(){
 
 //点击回收站按钮，显示回收站笔记
 function showRecycleNotes() {
-
     //显示回收站列表区
     showNoteList(4);
     //切换成预览状态

@@ -40,13 +40,36 @@ function showRecycleNoteWindow(){
 
 //单击恢复区笔记，变成被选中状态
 
-//弹出恢复对话框
+//弹出恢复对话框，加载笔记本列表
 function showReplayNoteWindow(){
-    alert("弹出恢复对话框");
     //弹出对话框
     $(".opacity_bg").show();//显示背景
     var url = "/alert/alert_replay.html";
     $("#can").load(url);
+
+    //加载笔记本列表
+    $.ajax({
+        url:"/notebook/loadbooks.form",
+        type:"post",
+        data:{"userId":userId},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                var books = result.data;//笔记本数组
+                for(var i=0;i<books.length;i++){
+                    var bookName = books[i].cn_notebook_name;
+                    var bookId = books[i].cn_notebook_id;
+                    //拼一个option元素
+                    var s_opt ='<option value="'+bookId+'">'+bookName+'</option>';
+                    //将option元素添加到select   这是加到最前
+                    $("#replaySelect").prepend(s_opt);
+                }
+            }
+        },
+        error:function(){
+            alert("加载笔记本列表失败");
+        }
+    });
 };
 
 //弹出转移笔记对话框

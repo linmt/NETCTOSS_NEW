@@ -115,14 +115,20 @@
                 $("#rollback_button").click(showRecycleNotes);
 
                 //单击恢复区笔记，变成被选中状态
+				//应该在预览区显示笔记详情？？？？？
                 $("#recycle_list").on("click","li",function () {
                     //将当前笔记li选中
                     $("#recycle_list li a.checked").removeClass("checked");
                     $(this).find("a").addClass("checked");
                 });
 
-                //回收站列表恢复按钮处理，弹出恢复对话框
+                //回收站列表恢复按钮处理，弹出恢复对话框，加载笔记本列表？？？？？
                 $("#recycle_list").on("click",".btn_replay",showReplayNoteWindow);
+
+                //加载笔记本列表，以供选择？？？？？
+
+				//选择要恢复到哪个笔记本，点击恢复？？？？？
+
 
                 //弹出转移笔记对话框   alert.js
                 $("#note_list").on("click",".btn_move",showMoveNoteWindow);
