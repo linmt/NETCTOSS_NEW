@@ -1,44 +1,45 @@
 $(function(){
-    $("#login").click(function(){
-        //清除提示信息
+    $("#login").click(function () {
         $("#count_span").html("");
         $("#password_span").html("");
-        //获取请求提交的参数
-        var name = $("#count").val().trim();
-        var password = $("#password").val().trim();
-        //检查参数格式
-        var ok = true;//表单数据通过检测
+        //获取参数
+        var name=$("#count").val().trim();
+        var password=$("#password").val().trim();
+        var ok=true;
         if(name==""){
-            ok = false;
-            $("#count_span").html("用户名为空");
+            $("#count_span").html("用户名不能为空");
+            ok=false;
         }
         if(password==""){
-            ok = false;
-            $("#password_span").html("密码为空");
+            $("#password_span").html("密码不能为空");
+            ok=false;
         }
-        //发送Ajax请求
-        if(ok){//通过检查
+        //发送请求
+        if(ok){
             $.ajax({
-                url:base_url+"/user/login.do",
-                type:"post",
+                //url:base_url+"/user/login.do",
+                url:'/user/login.form',
+                type:'post',
                 data:{"name":name,"password":password},
-                dataType:"json",
+                dataType:'json',
                 success:function(result){
-                    if(result.status==0){//正确
-                        //将用户ID存入Cookie
-                        var userId = result.data;
-                        addCookie("userId",userId,0.5);
+                    if(result.status==0){
+                        //14  获取用户ID，写入cookie
+                        //var userId=result.data.cn_user_id;
+                        var userId=result.data;
+                        addCookie("userId",userId,2);
                         window.location.href="edit.html";
-                    }else if(result.status==1){//用户名错误
+                    }else if(result.status==1){
                         $("#count_span").html(result.msg);
-                    }else if(result.status==2){//密码错误
+                    }else if(result.status==2){
                         $("#password_span").html(result.msg);
                     }
                 },
                 error:function(){
-                    alert("登录失败,稍后重试");
+                    alert("登录失败");
                 }
             });
         }
+
     });
 });

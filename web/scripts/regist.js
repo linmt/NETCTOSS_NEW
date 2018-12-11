@@ -41,7 +41,8 @@ $(function(){
         //发送Ajax
         if(ok){
             $.ajax({
-                url:base_url+"/user/regist.form",
+                url:"/user/regist.form",
+                //url:base_url+"/user/regist.form",
                 type:"post",
                 data:{"name":name,"password":password,"nick":nick},
                 dataType:"json",
