@@ -6,9 +6,11 @@ package com.lmt.dao;
 
 import com.lmt.annotation.MybatisDao;
 import com.lmt.entity.NoteBook;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @MybatisDao
+@Repository
 public interface BookDao {
     public List<NoteBook> findByUserId(String userId);
     public void save(NoteBook book);

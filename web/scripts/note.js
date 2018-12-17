@@ -6,7 +6,7 @@ function loadBookNotes(){
     //切换成编辑区
     $("#pc_part_3").show();
     $("#pc_part_5").hide();
-    //清楚非当前笔记本li的选中状态
+    //清除非当前笔记本li的选中状态
     $("#book_list li a").removeClass("checked");
     //将当前笔记本li设置成选中状态
     //也可以用children
@@ -52,9 +52,14 @@ function showNoteList(index){
 
 //添加一个笔记li
 function createNoteLi(noteTitle,noteId){
-    var s_li ='<li class="online">';
+    var s_li="";
+    s_li +='<li class="online">';
     s_li +='	<a>';
-    s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'+noteTitle+'<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-chevron-down"></i></button>';
+    s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
+    s_li +=noteTitle;
+    s_li +='        <button type="button" class="btn btn-default btn-xs btn_position btn_slide_down">';
+    s_li +='            <i class="fa fa-chevron-down"></i>';
+    s_li +='        </button>';
     s_li +='	</a>';
     s_li +='	<div class="note_menu" tabindex="-1">';
     s_li +='	<dl>';
@@ -168,6 +173,8 @@ function sureUpdateNote(){
                     $li.find("a").html(str);
                     //提示成功
                     alert(result.msg);
+                }else if(result.status==1){
+                    alert(result.msg);
                 }
             },
             error:function(){
@@ -189,7 +196,9 @@ function showNoteMenu(){
         //将当前笔记li选中
         $("#note_list li a.checked").removeClass("checked");
         $li.find("a").addClass("checked");
-        return false;//阻止冒泡
+        //阻止冒泡
+        //如果不阻止冒泡，那么点击后下拉菜单显示，同时也触发了下面的下拉菜单隐藏。最后结果是下拉菜单显示的瞬间就被隐藏了
+        return false;
     });
     //追加鼠标移动对笔记菜单的处理
     $("#note_list").on("mouseover",".note_menu",function(){
@@ -208,7 +217,7 @@ function showNoteMenu(){
 function sureShareNote(){
     //获取请求参数
     //也可以
-    // var $li = $(this).parent("li");
+    // var $li = $(this).parents("li");
     var $li = $("#note_list a.checked").parent();
     var noteId = $li.data("noteId");
     //发送Ajax请求
@@ -219,6 +228,15 @@ function sureShareNote(){
         data:{"noteId":noteId},
         dataType:"json",
         success:function(result){
+            var noteTitle=$li.text();
+            var s_li="";
+            s_li +='<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
+            s_li +=noteTitle;
+            s_li +='<i class="fa fa-sitemap"></i>';
+            s_li +='<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down">';
+            s_li +='    <i class="fa fa-chevron-down"></i>';
+            s_li +='</button>';
+            $li.find("a").html(s_li);
             alert(result.msg);
         },
         error:function(){
@@ -240,7 +258,7 @@ function sureSearchShare(event){
             //url:base_url+"/note/search.do",
             url:"/note/search.form",
             type:"post",
-            data:{"keyword":keyword},
+            data:{"keyword":keyword,"page":page},
             dataType:"json",
             success:function(result){
                 if(result.status==0){

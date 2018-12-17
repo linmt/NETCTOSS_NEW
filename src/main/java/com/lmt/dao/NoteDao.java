@@ -2,6 +2,7 @@ package com.lmt.dao;
 
 import com.lmt.annotation.MybatisDao;
 import com.lmt.entity.Note;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
  * Created by 张洲徽 on 2018/12/6.
  */
 @MybatisDao
+@Repository
 public interface NoteDao {
     /*
     public int batchDelete(String[] ids);

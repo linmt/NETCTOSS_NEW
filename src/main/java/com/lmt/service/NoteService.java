@@ -11,7 +11,9 @@ public interface NoteService {
     public NoteResult loadNoteDetail(String id);
     public NoteResult updateNote(String noteTitle,String noteBody,String noteId);
     public NoteResult shareNote(String noteId);
-    public NoteResult searchShare(String keyword);
+    //public NoteResult searchShare(String keyword);
+    //改成带分页功能的
+    public NoteResult searchShare(String keyword,int page);
     public NoteResult loadShare(String shareId);
     public NoteResult loadDeleteNote(String userId);
     /*

@@ -10,6 +10,7 @@ import com.lmt.entity.Note;
 import com.lmt.entity.NoteResult;
 import com.lmt.entity.Share;
 import com.lmt.util.NoteUtil;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,12 +69,14 @@ public class NoteServiceImpl implements NoteService{
         String noteId = NoteUtil.createId();
         note.setCn_note_id(noteId);
         note.setCn_note_status_id("1");//normal
+        //1-正常  2-喜欢  3-分享
         note.setCn_note_type_id("1");//normal
         note.setCn_note_body("");
         long time = System.currentTimeMillis();
         note.setCn_note_create_time(time);
         note.setCn_note_last_modify_time(time);
         noteDao.save(note);
+
         NoteResult result = new NoteResult();
         result.setStatus(0);
         result.setMsg("创建笔记成功");
@@ -103,11 +106,18 @@ public class NoteServiceImpl implements NoteService{
         note.setCn_note_body(noteBody);
         long time = System.currentTimeMillis();
         note.setCn_note_last_modify_time(time);
-        noteDao.dynamicUpdate(note);
+        int num=noteDao.dynamicUpdate(note);
+
         NoteResult result = new NoteResult();
-        result.setStatus(0);
-        result.setMsg("保存笔记成功");
-        return result;
+        if(num==1){
+            result.setStatus(0);
+            result.setMsg("保存笔记成功");
+            return result;
+        }else {
+            result.setStatus(1);
+            result.setMsg("保存笔记失败，插入0条数据");
+            return result;
+        }
     }
 
     @Transactional
@@ -138,7 +148,7 @@ public class NoteServiceImpl implements NoteService{
         result.setMsg("分享笔记成功");
         return result;
     }
-
+/*
     public NoteResult searchShare(String keyword) {
         String title = "";
         if(!"".equals(keyword) && keyword !=null){
@@ -149,6 +159,26 @@ public class NoteServiceImpl implements NoteService{
         }
         //List<Share> list = shareDao.findLikeTitle(title);
         List<Map> list = shareDao.findLikeTitle(title);
+        NoteResult result = new NoteResult();
+        result.setStatus(0);
+        result.setMsg("检索成功");
+        result.setData(list);
+        return result;
+    }
+*/
+    //改成带分页功能的
+    public NoteResult searchShare(String keyword,int page) {
+        String title = "";
+        if(!"".equals(keyword) && keyword !=null){
+            title = "%"+keyword+"%";
+        }else{
+            //搜索不为空的数据
+            title = "%";
+        }
+        Map<String,Object> params=new HashedMap();
+        params.put("title",title);
+        params.put("page",page);
+        List<Map> list = shareDao.findLikeTitle(params);
         NoteResult result = new NoteResult();
         result.setStatus(0);
         result.setMsg("检索成功");

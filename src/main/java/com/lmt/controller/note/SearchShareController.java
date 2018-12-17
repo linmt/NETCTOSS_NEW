@@ -19,8 +19,8 @@ public class SearchShareController {
 
     @RequestMapping("/search.form")
     @ResponseBody
-    public NoteResult execute(String keyword){
-        NoteResult result = noteService.searchShare(keyword);
+    public NoteResult execute(String keyword,int page){
+        NoteResult result = noteService.searchShare(keyword,page);
         return result;
     }
 }
