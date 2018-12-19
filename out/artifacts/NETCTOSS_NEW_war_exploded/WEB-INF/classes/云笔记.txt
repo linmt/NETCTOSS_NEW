@@ -85,3 +85,8 @@ edit.html
 点击恢复按钮，获取noteId，弹出恢复对话框，加载笔记本列表
 alert.js
 
+分页
+ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、SearchShareController
+edit.html、note.js
+
+

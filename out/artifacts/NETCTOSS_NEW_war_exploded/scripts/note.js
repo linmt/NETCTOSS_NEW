@@ -253,48 +253,9 @@ function sureSearchShare(event){
     if(code==13){//按回车键
         //获取查询关键字
         var keyword = $("#search_note").val().trim();
-        //发送Ajax请求
-        $.ajax({
-            //url:base_url+"/note/search.do",
-            url:"/note/search.form",
-            type:"post",
-            data:{"keyword":keyword,"page":page},
-            dataType:"json",
-            success:function(result){
-                if(result.status==0){
-                    //切换列表显示区
-                    showNoteList(6);//搜索结果列表显示,其他隐藏
-                    //切换成预览状态
-                    $("#pc_part_5").show();
-                    $("#pc_part_3").hide();
-                    //清空原有查询结果列表
-                    $("#search_list").empty();
-                    //循环生成笔记列表
-                    var notes = result.data;
-                    for(var i=0;i<notes.length;i++){
-                        //结果返回的是map，所以这里要大写
-                        var title = notes[i].CN_SHARE_TITLE;
-                        var shareId = notes[i].CN_SHARE_ID;
-                        //拼一个li
-                        var s_li ='<li class="online">';
-                            s_li +='	<a>';
-                            s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
-                            s_li += title;
-                            s_li += '      <button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-star"></i></button>';
-                            s_li +='	</a>';
-                            s_li +='</li>';
-                        //绑定shareId
-                        var $li = $(s_li);
-                        $li.data("shareId",shareId);
-                        //将li添加到搜索结果列表区
-                        $("#search_list").append($li);
-                    }
-                }
-            },
-            error:function(){
-                alert("检索笔记失败");
-            }
-        });
+        page=1;
+        //new
+        loadPageShare(keyword,page);
     }
 };
 
@@ -397,3 +358,61 @@ function sureMoveNote(){
         }
     });
 };
+
+//加载更多分享笔记
+function moreSearchShare(){
+    var keyword=$("#search_note").val().trim();
+    page=page+1;
+    //加载列表
+    loadPageShare(keyword,page);
+};
+
+//根据页码和关键字加载分享笔记
+function loadPageShare(keyword,page){
+    $.ajax({
+        url:"/note/search.form",
+        type:"post",
+        data:{"keyword":keyword,"page":page},
+        dataType:"json",
+        success:function(result){
+            if(result.status==0){
+                //切换列表显示区
+                showNoteList(6);//搜索结果列表显示,其他隐藏
+                //切换成预览状态
+                $("#pc_part_5").show();
+                $("#pc_part_3").hide();
+                //清空原有查询结果列表
+                $("#search_list").empty();
+                //循环生成笔记列表
+                var notes = result.data;
+                for(var i=0;i<notes.length;i++){
+                    //结果返回的是map，所以这里要大写
+                    var title = notes[i].CN_SHARE_TITLE;
+                    var shareId = notes[i].CN_SHARE_ID;
+                    //拼一个li
+                    var s_li ='<li class="online">';
+                    s_li +='	<a>';
+                    s_li +='		<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>';
+                    s_li += title;
+                    s_li += '      <button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-star"></i></button>';
+                    s_li +='	</a>';
+                    s_li +='</li>';
+                    //绑定shareId
+                    var $li = $(s_li);
+                    $li.data("shareId",shareId);
+                    //将li添加到搜索结果列表区
+                    $("#search_list").append($li);
+                }
+            }
+        },
+        error:function(){
+            alert("检索笔记失败");
+        }
+    });
+};
+
+//确定恢复回收站笔记
+//没写完
+function sureReplayNote() {
+    alert("恢复了");
+}

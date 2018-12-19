@@ -43,8 +43,6 @@ function showReplayNoteWindow(){
     //获取noteId
     var $li=$(this).parent();
     var noteId=$li.data("noteId");
-    //将noteId绑定到恢复按钮
-    $("#sure_replay").date("noteId",noteId);
 
     //弹出对话框
     $(".opacity_bg").show();//显示背景
@@ -53,6 +51,8 @@ function showReplayNoteWindow(){
     // alert_replay.html还没返回之前，已经执行了loadbooks.form
     //如何避免这种风险：
     $("#can").load(url,function () {
+        //将noteId绑定到恢复按钮
+        $("#sure_replay").data("noteId",noteId);
         //html载入后执行，加载笔记本列表
         loadReplaySelect();
     });

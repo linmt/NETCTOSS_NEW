@@ -126,13 +126,15 @@
                 //回收站列表恢复按钮处理，获取noteId，弹出恢复对话框，加载笔记本列表   alert.js
                 $("#recycle_list").on("click",".btn_replay",showReplayNoteWindow);
 
-				//选择要恢复到哪个笔记本，点击恢复？？？？？
-
+				//选择要恢复到哪个笔记本，点击恢复
+                $("#can").on("click","#sure_replay",sureReplayNote);
 
                 //弹出转移笔记对话框   alert.js
                 $("#note_list").on("click",".btn_move",showMoveNoteWindow);
                 //确定转移笔记操作
                 $("#can").on("click","#sure_movenote",sureMoveNote);
+
+                $("#more_note").click(moreSearchShare);
             });
         }
 	</script>
