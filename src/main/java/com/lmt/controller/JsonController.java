@@ -17,6 +17,8 @@ public class JsonController {
     @ResponseBody  //调用json
     public UserTestJson loadUser(){
         UserTestJson u=new UserTestJson(1,"Tom",20);
+        //制造一个异常，测试AOP
+        Integer.valueOf("ad");
         return u;
     }
     @RequestMapping("/json2.form")

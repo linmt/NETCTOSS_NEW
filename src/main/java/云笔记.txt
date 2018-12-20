@@ -89,4 +89,7 @@ alert.js
 ShareDao、ShareMapper.xml、NoteService、NoteServiceImpl、SearchShareController
 edit.html、note.js
 
+AOP
+LoggerBean、JsonController、TestLoggerBean
+applicationContext.xml
 
