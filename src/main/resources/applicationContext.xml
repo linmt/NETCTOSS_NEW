@@ -58,9 +58,10 @@
 
     <!-- AOP-->
     <!--声明方面组件-->
-    <bean id="LoggerBean" class="com.lmt.aspect.LoggerBean"/>
+    <!--<bean id="LoggerBean" class="com.lmt.aspect.LoggerBean"/>-->
 
     <!--配置AOP-->
+    <!--
     <aop:config>
         <aop:aspect ref="LoggerBean">
             <aop:before method="before_log" pointcut="within(com.lmt.controller..*)"/>
@@ -74,4 +75,16 @@
             <aop:after-throwing method="after_throwing_log" throwing="e" pointcut="within(com.lmt.controller..*)"/>
         </aop:aspect>
     </aop:config>
+    -->
+
+    <!--开启AOP注解扫描-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 定义事务管理bean(注解版) -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dbcp"></property>
+    </bean>
+
+    <!-- 开启对@Transactional标记的支持 -->
+    <tx:annotation-driven transaction-manager="txManager"/>
 </beans>

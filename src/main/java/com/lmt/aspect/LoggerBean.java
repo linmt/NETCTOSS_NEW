@@ -1,6 +1,11 @@
 package com.lmt.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,11 +13,15 @@ import java.util.Date;
 /**
  * Created by 张洲徽 on 2018/12/20.
  */
+@Component
+@Aspect
 public class LoggerBean {
+    @Before("within(com.lmt.controller..*)")
     public void before_log(){
         System.out.println("before_log");
     }
 
+    @Around("within(com.lmt.controller..*)")
     public Object around_log(ProceedingJoinPoint p) throws Throwable{
         //目标组件的类名
         String className=p.getTarget().getClass().getName();
@@ -39,6 +48,7 @@ public class LoggerBean {
          */
     }
 
+    @AfterThrowing(pointcut = "within(com.lmt.controller..*)",throwing = "e")
     public void after_throwing_log (Exception e){
         StackTraceElement[] elems=e.getStackTrace();
         //记录异常信息
