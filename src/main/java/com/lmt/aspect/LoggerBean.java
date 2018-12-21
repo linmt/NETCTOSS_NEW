@@ -46,6 +46,7 @@ public class LoggerBean {
             执行完目标组件方法后执行的环绕通知
             User{id=1, name='Tom', age='20'}
          */
+
     }
 
     @AfterThrowing(pointcut = "within(com.lmt.controller..*)",throwing = "e")
@@ -58,5 +59,7 @@ public class LoggerBean {
             在2018-12-20 04:49:49，执行了com.lmt.controller.JsonController.loadUser()
             -->java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
          */
+
     }
+
 }
