@@ -12,11 +12,9 @@ import com.lmt.entity.Share;
 import com.lmt.util.NoteUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -143,6 +141,11 @@ public class NoteServiceImpl implements NoteService{
         share.setCn_share_body(note.getCn_note_body());
         String shareId = NoteUtil.createId();
         share.setCn_share_id(shareId);
+
+        //模拟异常
+        String str=null;
+        str.length();
+
         shareDao.save(share);//插入分享表
         result.setStatus(0);
         result.setMsg("分享笔记成功");

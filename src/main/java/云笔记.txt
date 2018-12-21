@@ -100,4 +100,6 @@ applicationContext.xml
 性能审计案例
 AuditBean
 
+记录错误日志案例
+ExceptionBean、NoteServiceImpl
 
