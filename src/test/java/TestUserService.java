@@ -49,7 +49,7 @@ public class TestUserService extends BaseJunit4Test {
     //注入AOP后：
     //采用cglib机制，即在xml中加入<aop:aspectj-autoproxy proxy-target-class="true"/>：
     // com.lmt.service.UserServiceImpl$$EnhancerBySpringCGLIB$$c37f5e2e
-    //采用JDK自带java.reflect.Proxy API，即在xnl不加入<aop:aspectj-autoproxy proxy-target-class="true"/>：
+    //采用JDK自带java.reflect.Proxy API，xml配置<aop:aspectj-autoproxy/>，或者直接去掉该项：
     // com.sun.proxy.$Proxy38
     @org.junit.Test
     public void test2( ) throws NoSuchAlgorithmException {
