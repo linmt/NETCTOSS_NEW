@@ -93,3 +93,7 @@ AOP
 LoggerBean、JsonController、TestLoggerBean
 applicationContext.xml
 
+事务管理
+TestUserService、UserServiceImpl
+applicationContext.xml
+

@@ -78,7 +78,7 @@
     -->
 
     <!--开启AOP注解扫描-->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
     <!-- 定义事务管理bean(注解版) -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

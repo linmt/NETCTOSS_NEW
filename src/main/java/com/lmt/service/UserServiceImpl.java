@@ -5,6 +5,7 @@ import com.lmt.entity.User;
 import com.lmt.entity.NoteResult;
 import com.lmt.util.NoteUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by 张洲徽 on 2018/11/29.
  */
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
