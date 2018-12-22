@@ -1,6 +1,7 @@
 package com.lmt.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by 张洲徽 on 2018/11/26.
@@ -11,6 +12,15 @@ public class User implements Serializable {
     private String cn_user_password;
     private String cn_user_token;
     private String cn_user_desc;
+    private List<NoteBook> books;
+
+    public List<NoteBook> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<NoteBook> books) {
+        this.books = books;
+    }
 
     public String getCn_user_id() {
         return cn_user_id;
