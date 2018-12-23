@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lmt.dao.VehicleDao">
+
+    <select id="findAll" resultMap="vehicleMap">
+        select * from T_CAR
+    </select>
+    <resultMap id="vehicleMap" type="com.lmt.entity.Vehicle">
+        <id property="id" column="id"/>
+        <result property= "color" column="color"/>
+        <discriminator javaType="string" column="type">
+            <case value="T" resultType="com.lmt.entity.Truck">
+                <result property="boxSize" column="boxSize"/>
+            </case>
+            <case value="C" resultType="com.lmt.entity.Car">
+                <result property= "doorSize" column="doorSize"/>
+            </case>
+        </discriminator>
+    </resultMap>
+
+</mapper>

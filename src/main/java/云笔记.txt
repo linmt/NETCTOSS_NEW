@@ -108,3 +108,6 @@ User、RelationDao、RelationMapper.xml、TestRelationDao
 
 通过查询笔记信息，关联用户信息（关联单个对象）（两条SQL、单条SQL）
 NoteBook、RelationDao、RelationMapper.xml、TestRelationDao
+
+鉴别器
+Vehicle、Car、Truck、VehicleDao、VehicleMapper.xml、VehicleDao、TestVehicle
