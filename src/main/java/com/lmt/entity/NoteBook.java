@@ -13,6 +13,15 @@ public class NoteBook implements Serializable {
     private String cn_notebook_name;
     private String cn_notebook_desc;
     private Timestamp cn_notebook_createtime;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {

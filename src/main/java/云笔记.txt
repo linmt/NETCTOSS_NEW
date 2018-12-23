@@ -103,6 +103,8 @@ AuditBean
 记录错误日志案例
 ExceptionBean、NoteServiceImpl
 
-通过userId查询用户信息和关联的笔记本信息案例（两条SQL、单条SQL）
+通过userId查询用户信息和关联的笔记本信息案例（两条SQL、单条SQL）（关联多个对象）
 User、RelationDao、RelationMapper.xml、TestRelationDao
 
+通过查询笔记信息，关联用户信息（关联单个对象）（两条SQL、单条SQL）
+NoteBook、RelationDao、RelationMapper.xml、TestRelationDao
