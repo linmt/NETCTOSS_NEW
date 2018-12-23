@@ -32,18 +32,18 @@ public class TestRelationDao extends BaseJunit4Test {
         }
     }
 */
-/*
-    @org.junit.Test
-    public void test2( ){
-        User user=rdao.findUserAndBooks2("52f9b276-38ee-447f-a3aa-0d54e7a736e4");
-        System.out.println("=====用户信息=====");
-        System.out.println(user.getCn_user_id()+":"+user.getCn_user_name());
-        System.out.println("=====笔记本列表=====");
-        for(NoteBook book:user.getBooks()){
-            System.out.println(book.getCn_notebook_id()+":"+book.getCn_notebook_name());
-        }
-    }
-*/
+
+//    @org.junit.Test
+//    public void test2( ){
+//        User user=rdao.findUserAndBooks2("52f9b276-38ee-447f-a3aa-0d54e7a736e4");
+//        System.out.println("=====用户信息=====");
+//        System.out.println(user.getCn_user_id()+":"+user.getCn_user_name());
+//        System.out.println("=====笔记本列表=====");
+//        for(NoteBook book:user.getBooks()){
+//            System.out.println(book.getCn_notebook_id()+":"+book.getCn_notebook_name());
+//        }
+//    }
+
 /*
     @org.junit.Test
     public void test3( ){

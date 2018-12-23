@@ -32,6 +32,7 @@
         <result property="cn_user_password" column="cn_user_password"/>
         <result property="cn_user_token" column="cn_user_token"/>
         <result property="cn_user_desc" column="cn_user_desc"/>
+        <!-- 去掉javaType、column这两项也可以 -->
         <collection property="books" javaType="java.util.List"
                     ofType="com.lmt.entity.NoteBook" column="cn_user_id">
             <id property="cn_notebook_id" column="cn_notebook_id"/>
@@ -62,7 +63,7 @@
         from cn_noteBook a
         join cn_user b on b.cn_user_id=a.cn_user_id
     </select>
-
+<!--
     <resultMap id="bookMap2" type="com.lmt.entity.NoteBook">
         <id property="cn_notebook_id" column="cn_notebook_id"/>
         <result property="cn_user_id" column="cn_user_id"/>
@@ -77,5 +78,24 @@
             <result property="cn_user_token" column="cn_user_token"/>
             <result property="cn_user_desc" column="cn_user_desc"/>
         </association>
+    </resultMap>
+ -->
+
+    <resultMap id="bookMap2" type="com.lmt.entity.NoteBook">
+        <id property="cn_notebook_id" column="cn_notebook_id"/>
+        <result property="cn_user_id" column="cn_user_id"/>
+        <result property="cn_notebook_type_id" column="cn_notebook_type_id"/>
+        <result property="cn_notebook_name" column="cn_notebook_name"/>
+        <result property="cn_notebook_desc" column="cn_notebook_desc"/>
+        <result property="cn_notebook_createtime" column="cn_notebook_createtime"/>
+        <association property="user" column="cn_user_id" javaType="com.lmt.entity.User" resultMap="userResult"></association>
+    </resultMap>
+
+    <resultMap id="userResult" type="com.lmt.entity.User">
+        <id property="cn_user_id" column="cn_user_id"/>
+        <result property="cn_user_name" column="cn_user_name"/>
+        <result property="cn_user_password" column="cn_user_password"/>
+        <result property="cn_user_token" column="cn_user_token"/>
+        <result property="cn_user_desc" column="cn_user_desc"/>
     </resultMap>
 </mapper>
