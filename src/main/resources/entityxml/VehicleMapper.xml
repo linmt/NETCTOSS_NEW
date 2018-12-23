@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.lmt.dao.VehicleDao">
-
     <select id="findAll" resultMap="vehicleMap">
         select * from T_CAR
     </select>
@@ -17,5 +16,4 @@
             </case>
         </discriminator>
     </resultMap>
-
 </mapper>

@@ -110,4 +110,4 @@ User、RelationDao、RelationMapper.xml、TestRelationDao
 NoteBook、RelationDao、RelationMapper.xml、TestRelationDao
 
 鉴别器
-Vehicle、Car、Truck、VehicleDao、VehicleMapper.xml、VehicleDao、TestVehicle
+Vehicle、Car、Truck、VehicleDao、VehicleMapper.xml、TestVehicle
