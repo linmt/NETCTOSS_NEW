@@ -10,10 +10,26 @@
         order by cn_note_create_time desc
     </select>
 -->
+    <!--
     <select id="findByBookId" parameterType="string" resultType="map">
         select cn_note_id,cn_note_title from cn_note
         where cn_notebook_id=#{bookId}
         and cn_note_status_id='1'
+        order by cn_note_create_time
+    </select>
+-->
+    <select id="findByBookId" parameterType="com.lmt.entity.NoteBook" resultType="map">
+        select cn_note_id,cn_note_title from cn_note
+        <where >
+            <if test="cn_notebook_id!=null">
+                cn_notebook_id=#{bookId}
+            </if>
+            <choose>
+                <when test="cn_note_status_id!='1'">
+                    and cn_note_status_id='1'
+                </when>
+            </choose>
+        </where>
         order by cn_note_create_time
     </select>
 
