@@ -142,11 +142,12 @@ public class NoteServiceImpl implements NoteService{
         String shareId = NoteUtil.createId();
         share.setCn_share_id(shareId);
 
+        shareDao.save(share);//插入分享表
+
         //模拟异常
         String str=null;
         str.length();
 
-        shareDao.save(share);//插入分享表
         result.setStatus(0);
         result.setMsg("分享笔记成功");
         return result;
