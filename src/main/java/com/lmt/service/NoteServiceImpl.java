@@ -41,7 +41,10 @@ public class NoteServiceImpl implements NoteService{
     */
     public NoteResult loadBookNotes(String bookId) {
         NoteResult result = new NoteResult();
-        List<Map> list = noteDao.findByBookId(bookId);
+        Note note=new Note();
+        note.setCn_notebook_id(bookId);
+        note.setCn_note_type_id("1");
+        List<Map> list = noteDao.findByBookId(note);
         /*
         for(Map m:list){
             for (Object key : m.keySet()) {

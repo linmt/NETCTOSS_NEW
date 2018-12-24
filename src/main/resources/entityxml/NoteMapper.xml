@@ -18,14 +18,14 @@
         order by cn_note_create_time
     </select>
 -->
-    <select id="findByBookId" parameterType="com.lmt.entity.NoteBook" resultType="map">
+    <select id="findByBookId" parameterType="com.lmt.entity.Note" resultType="map">
         select cn_note_id,cn_note_title from cn_note
         <where >
             <if test="cn_notebook_id!=null">
-                cn_notebook_id=#{bookId}
+                and cn_notebook_id=#{cn_notebook_id}
             </if>
             <choose>
-                <when test="cn_note_status_id!='1'">
+                <when test="cn_note_status_id!=null">
                     and cn_note_status_id='1'
                 </when>
             </choose>

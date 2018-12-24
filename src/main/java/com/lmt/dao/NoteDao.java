@@ -25,7 +25,9 @@ public interface NoteDao {
 
     */
     //public List<Note> findByBookId(String bookId);
-    public List<Map> findByBookId(String bookId);
+    //public List<Map> findByBookId(String bookId);
+    //测试动态SQL
+    public List<Map> findByBookId(Note note);
     public void save(Note note);
     public Note findById(String id);
     //动态更新

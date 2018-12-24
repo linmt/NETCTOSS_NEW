@@ -111,3 +111,6 @@ NoteBook、RelationDao、RelationMapper.xml、TestRelationDao
 
 鉴别器
 Vehicle、Car、Truck、VehicleDao、VehicleMapper.xml、TestVehicle
+
+动态SQL
+NoteMapper.xml、NoteDao、NoteServiceImpl
