@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -264,4 +265,28 @@ public class NoteServiceImpl implements NoteService{
         return result;
     }
     */
+
+    //测试动态SQL，组合查询
+    public NoteResult search(String title,String type,Long begin,Long end){
+        Map map=new HashMap();
+        if(title!=null&&!"".equals(title)){
+            title="%"+title+"%";
+            map.put("title",title);
+        }
+        if(type!=null&&!"".equals(type)){
+            map.put("type","'"+type+"'");
+        }
+        if(begin!=null&&!"".equals(begin)){
+            map.put("begin",begin);
+        }
+        if(end!=null&&!"".equals(end)){
+            map.put("end",end);
+        }
+        List<Note> lists=noteDao.search(map);
+        NoteResult result = new NoteResult();
+        result.setData(lists);
+        result.setStatus(0);
+        result.setMsg("检索笔记成功");
+        return result;
+    }
 }

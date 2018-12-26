@@ -33,4 +33,7 @@ public interface NoteDao {
     //动态更新
     public int dynamicUpdate(Note note);
     public List<Map> findDeleteNote(String userId);
+
+    //测试动态SQL，组合查询
+    public List<Note> search(Map map);
 }

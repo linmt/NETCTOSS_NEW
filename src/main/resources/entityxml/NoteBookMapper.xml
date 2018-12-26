@@ -24,5 +24,4 @@
         #{cn_notebook_createtime}
         )
     </insert>
-
 </mapper>
