@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -267,7 +269,7 @@ public class NoteServiceImpl implements NoteService{
     */
 
     //测试动态SQL，组合查询
-    public NoteResult search(String title,String type,Long begin,Long end){
+    public NoteResult search(String title,String type,String begin,String end){
         Map map=new HashMap();
         if(title!=null&&!"".equals(title)){
             title="%"+title+"%";
@@ -277,10 +279,15 @@ public class NoteServiceImpl implements NoteService{
             map.put("type",type);
         }
         if(begin!=null&&!"".equals(begin)){
-            map.put("begin",begin);
+            Date beginDate=java.sql.Date.valueOf(begin);
+            map.put("beginDate",beginDate.getTime());
         }
         if(end!=null&&!"".equals(end)){
-            map.put("end",end);
+            Date endDate=java.sql.Date.valueOf(end);
+            Calendar c=Calendar.getInstance();
+            c.setTime(endDate);
+            c.add(Calendar.DATE,1);
+            map.put("endDate",c.getTimeInMillis());
         }
         List<Note> lists=noteDao.search(map);
         NoteResult result = new NoteResult();

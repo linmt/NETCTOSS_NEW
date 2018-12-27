@@ -19,7 +19,8 @@ public class SearchNotesController {
 
     @RequestMapping("/searchnotes.form")
     @ResponseBody
-    public NoteResult execute(String title,String type,Long begin,Long end){
+    public NoteResult execute(String title,String type,String begin,String end){
+        System.out.println(title+type+begin+end);
         NoteResult result = noteService.search(title,type,begin,end);
         return result;
     }

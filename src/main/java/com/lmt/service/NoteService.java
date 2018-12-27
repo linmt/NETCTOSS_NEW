@@ -22,5 +22,5 @@ public interface NoteService {
     */
 
     //测试动态SQL，组合查询
-    public NoteResult search(String title,String type,Long begin,Long end);
+    public NoteResult search(String title,String type,String begin,String end);
 }

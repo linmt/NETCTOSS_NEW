@@ -16,7 +16,7 @@ public class TestSearchNotes extends BaseJunit4Test {
         SearchNotesController snc=ac.getBean("searchNotesController", SearchNotesController.class);
         //NoteResult result=snc.execute("笔","2",1402538152753L,1402538197794L);
         //NoteResult result=snc.execute(null,null,null,null);
-        NoteResult result=snc.execute("笔","2",null,null);
+        NoteResult result=snc.execute("笔","2","2014-06-13",null);
         List<Note> lists= (List<Note>) result.getData();
         System.out.println(lists.size());
     }
@@ -27,7 +27,7 @@ public class TestSearchNotes extends BaseJunit4Test {
         SearchNotesController snc=ac.getBean("searchNotesController", SearchNotesController.class);
         //NoteResult result=snc.execute("笔","2",1402538152753L,1402538197794L);
         //NoteResult result=snc.execute(null,null,null,null);
-        NoteResult result=snc.execute("笔","1",null,null);
+        NoteResult result=snc.execute("笔","1","2014-06-13",null);
         List<Note> lists= (List<Note>) result.getData();
         System.out.println(lists.size());
     }
@@ -38,7 +38,7 @@ public class TestSearchNotes extends BaseJunit4Test {
         SearchNotesController snc=ac.getBean("searchNotesController", SearchNotesController.class);
         //NoteResult result=snc.execute("笔","2",1402538152753L,1402538197794L);
         //NoteResult result=snc.execute(null,null,null,null);
-        NoteResult result=snc.execute("笔",null,null,null);
+        NoteResult result=snc.execute("笔",null,"2014-06-13",null);
         List<Note> lists= (List<Note>) result.getData();
         System.out.println(lists.size());
     }

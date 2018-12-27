@@ -116,4 +116,5 @@ Vehicle、Car、Truck、VehicleDao、VehicleMapper.xml、TestVehicle
 NoteMapper.xml、NoteDao、NoteServiceImpl
 
 动态SQL-2
-high_search.html、NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、SearchNotesController、TestSearchNotes
+high_search.html、NoteMapper.xml、NoteDao、NoteService、NoteServiceImpl、SearchNotesController、TestSearchNotes、Note
+applicationContext.xml、mybatis-config.xml

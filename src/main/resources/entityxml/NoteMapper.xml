@@ -73,11 +73,11 @@
                     and cn_note_type_id = #{type}
                 </when>
             </choose>
-            <if test="begin!=null">
-                and cn_note_create_time >= #{begin}
+            <if test="beginDate!=null">
+                and cn_note_create_time >= #{beginDate}
             </if>
-            <if test="end!=null">
-                and cn_note_last_modify_time &lt;= #{end}
+            <if test="endDate!=null">
+                and cn_note_last_modify_time &lt;= #{endDate}
             </if>
         </where>
         order by cn_note_create_time
