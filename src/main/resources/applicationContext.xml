@@ -43,6 +43,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dbcp" />
         <property name="mapperLocations" value="classpath:entityxml/*.xml" />
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
     </bean>
 
     <!-- 自动扫描com.lmt.dao包和子包，将所有扫描到的Mapper接口都创建问Bean对象，默认的名字是接口名首字母小写-->

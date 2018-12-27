@@ -274,7 +274,7 @@ public class NoteServiceImpl implements NoteService{
             map.put("title",title);
         }
         if(type!=null&&!"".equals(type)){
-            map.put("type","'"+type+"'");
+            map.put("type",type);
         }
         if(begin!=null&&!"".equals(begin)){
             map.put("begin",begin);

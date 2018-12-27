@@ -16,10 +16,30 @@ public class TestSearchNotes extends BaseJunit4Test {
         SearchNotesController snc=ac.getBean("searchNotesController", SearchNotesController.class);
         //NoteResult result=snc.execute("笔","2",1402538152753L,1402538197794L);
         //NoteResult result=snc.execute(null,null,null,null);
-        NoteResult result=snc.execute("笔","0",1402538152753L,1402538197794L);
+        NoteResult result=snc.execute("笔","2",null,null);
         List<Note> lists= (List<Note>) result.getData();
-        for(Note note:lists){
-            System.out.println(note.getCn_note_title()+"   "+note.getCn_note_id());
-        }
+        System.out.println(lists.size());
+    }
+
+    @org.junit.Test
+    public void test2( ){
+        ApplicationContext ac=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        SearchNotesController snc=ac.getBean("searchNotesController", SearchNotesController.class);
+        //NoteResult result=snc.execute("笔","2",1402538152753L,1402538197794L);
+        //NoteResult result=snc.execute(null,null,null,null);
+        NoteResult result=snc.execute("笔","1",null,null);
+        List<Note> lists= (List<Note>) result.getData();
+        System.out.println(lists.size());
+    }
+
+    @org.junit.Test
+    public void test3( ){
+        ApplicationContext ac=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        SearchNotesController snc=ac.getBean("searchNotesController", SearchNotesController.class);
+        //NoteResult result=snc.execute("笔","2",1402538152753L,1402538197794L);
+        //NoteResult result=snc.execute(null,null,null,null);
+        NoteResult result=snc.execute("笔",null,null,null);
+        List<Note> lists= (List<Note>) result.getData();
+        System.out.println(lists.size());
     }
 }

@@ -40,28 +40,48 @@
             <if test="title!=null">
                 and cn_note_title like #{title}
             </if>
-    <!--
-    <choose>
-        <when test="type=1">
-            and cn_note_type_id='1'
-        </when>
-        <when test="type=2">
-            and cn_note_type_id=null
-        </when>
-    </choose>
-    -->
-            <if test="type!=null">
+            <!--
+            <if test="(type!=null and type!=0)">
                 and cn_note_type_id = #{type}
             </if>
-    <if test="begin!=null">
-        and cn_note_create_time >= #{begin}
-    </if>
-    <if test="end!=null">
-        and cn_note_last_modify_time &lt;= #{end}
-    </if>
-</where>
-order by cn_note_create_time
-</select>
+
+            不能用'1'
+            <if test="type==1">
+                and cn_note_type_id = #{type}
+            </if>
+            <if test="type==2">
+                and cn_note_type_id = #{type}
+            </if>
+
+            <choose>
+                <when test="type==1">
+                    and cn_note_type_id = #{type}
+                </when>
+                <when test="type==2">
+                    and cn_note_type_id = #{type}
+                </when>
+                <otherwise>
+                    and cn_note_type_id in ('1','2')
+                </otherwise>
+            </choose>
+            -->
+            <choose>
+                <when test="type==1">
+                    and cn_note_type_id = #{type}
+                </when>
+                <when test="type==2">
+                    and cn_note_type_id = #{type}
+                </when>
+            </choose>
+            <if test="begin!=null">
+                and cn_note_create_time >= #{begin}
+            </if>
+            <if test="end!=null">
+                and cn_note_last_modify_time &lt;= #{end}
+            </if>
+        </where>
+        order by cn_note_create_time
+        </select>
 
 <insert id="save" parameterType="com.lmt.entity.Note">
 insert into cn_note(
