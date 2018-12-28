@@ -26,16 +26,13 @@ public class Excel {
             File file = new File(src);
             file.createNewFile();
 
-
             OutputStream outputStream = new FileOutputStream(file);// 创建工作薄
             WritableWorkbook writableWorkbook = Workbook.createWorkbook(outputStream);
             WritableSheet sheet = writableWorkbook.createSheet("First sheet", 0);// 创建新的一页
 
-
             JSONArray jsonArray = json.getJSONArray("data");// 得到data对应的JSONArray
             Label label; // 单元格对象
             int column = 0; // 列数计数
-
 
             // 将第一行信息加到页中。如：姓名、年龄、性别
             JSONObject first = jsonArray.getJSONObject(0);
@@ -46,7 +43,6 @@ public class Excel {
                 sheet.addCell(label); // 将单元格加到页
             }
 
-
             // 遍历jsonArray
             for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i); // 得到数组的每项
@@ -55,6 +51,11 @@ public class Excel {
                 while (iterator.hasNext()) {
                     String key = iterator.next(); // 得到key
                     String value = item.getString(key); // 得到key对应的value
+                    value=value.replace('"','\'');
+                    if(value.indexOf(":")!=-1){
+                        value="'"+key+"':"+value;
+                    }
+                    System.out.println(value);
                     label = new Label(column++, (i + 1), value); // 第一个参数是单元格所在列,第二个参数是单元格所在行,第三个参数是值
                     sheet.addCell(label); // 将单元格加到页
                 }
@@ -66,8 +67,6 @@ public class Excel {
             result.put("reason", e.getMessage()); // 将调用该函数失败的原因返回
             return result;
         }
-
-
         result.put("result", "successed");
         return result;
     }
