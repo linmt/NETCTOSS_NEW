@@ -23,6 +23,10 @@ public class UserLoginController {
     @ResponseBody
     public NoteResult execute(@RequestParam("name") String name, @RequestParam("password")String password) throws NoSuchAlgorithmException {
         NoteResult result =userService.checkLogin(name, password);
+        //com.lmt.service.UserServiceImpl@e57bde6
+        System.out.println(userService);
+        //com.lmt.service.UserServiceImpl$$EnhancerBySpringCGLIB$$b8e90bb7
+        System.out.println(userService.getClass().getName());
         return result;
     }
 }
