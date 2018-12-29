@@ -18,7 +18,7 @@ public class JsonController {
     public UserTestJson loadUser(){
         UserTestJson u=new UserTestJson(1,"Tom",20);
         //制造一个异常，测试AOP
-        Integer.valueOf("ad");
+        //Integer.valueOf("ad");
         return u;
     }
     @RequestMapping("/json2.form")

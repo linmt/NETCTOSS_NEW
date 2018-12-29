@@ -128,3 +128,6 @@ MessageUtil、TestJunit、TestRunner
 核心API
 Assert 类：TestJunit1、TestRunner1
 
+测试注解@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+TestLoggerBean、JsonController
+
