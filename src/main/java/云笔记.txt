@@ -134,3 +134,6 @@ TestLoggerBean、JsonController
 spring-test介绍和案例
 TestLoginController
 
+IOC原理演示
+TestIOC
+
