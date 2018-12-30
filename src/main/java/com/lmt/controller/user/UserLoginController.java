@@ -23,10 +23,17 @@ public class UserLoginController {
     @ResponseBody
     public NoteResult execute(@RequestParam("name") String name, @RequestParam("password")String password) throws NoSuchAlgorithmException {
         NoteResult result =userService.checkLogin(name, password);
-        //com.lmt.service.UserServiceImpl@e57bde6
         System.out.println(userService);
-        //com.lmt.service.UserServiceImpl$$EnhancerBySpringCGLIB$$b8e90bb7
         System.out.println(userService.getClass().getName());
         return result;
+        /*
+            开启AOP注解扫描方式一：<aop:aspectj-autoproxy/>
+            com.lmt.service.UserServiceImpl@3a0d4a07
+            com.sun.proxy.$Proxy134
+
+            开启AOP注解扫描方式一：<aop:aspectj-autoproxy proxy-target-class="true"/>
+            com.lmt.service.UserServiceImpl@21c51306
+            com.lmt.service.UserServiceImpl$$EnhancerBySpringCGLIB$$387dba2f
+         */
     }
 }
